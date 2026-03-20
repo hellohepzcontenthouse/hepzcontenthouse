@@ -39,17 +39,17 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* DARK MODE TOKENS */
-  --bg: #000000;
-  --bg-card: #0A0A0A;
-  --bg-nav: rgba(0, 0, 0, 0.85);
+  /* DARK MODE TOKENS - Sophisticated premium black */
+  --bg: #050505;
+  --bg-card: #0e0e0e;
+  --bg-nav: rgba(5, 5, 5, 0.85);
   
   --accent: #3B9EFF;
   --accent-hover: #1A7FE8;
-  --line: rgba(255, 255, 255, 0.15); 
+  --line: rgba(255, 255, 255, 0.12); 
   --border-w: 1px;
   
-  --text-main: #FFFFFF;
+  --text-main: #F3F3F3;
   --text-muted: #A0A0A0;
   --text-inv: #000000;
   
@@ -1666,19 +1666,19 @@ body.light #s05-sub { color: #0A66C2; }
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="400">
-          I started as a student with more words than plans, and I put 13 years of my life into learning one thing: how to tell stories, how to use them to move people.
+          I started as a student with more words than plans, and I spent 13 years of my life learning one thing: how to tell stories and how to use them to move people.
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="500">
-          Then I took everything I learned from literature, from life, from time alone, and from conversations with people, and put it straight into social media.
+          Then I took everything I had learned from literature, from life, from time alone, and from conversations with people, and brought it straight into social media.
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="600">
-          Six years of learning how attention works, how to make someone stop, see, and come back.
+          Six years of learning how attention works, how to make someone stop, stay, and come back.
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="700">
-          Using platforms, reels, written posts, captions, and design across everything.
+          Across platforms, reels, written posts, captions, and design, I learned how to make ideas land and stay.
         </span>
 
         <span class="fl-block fl-pivot" data-delay="800">
@@ -1686,20 +1686,20 @@ body.light #s05-sub { color: #0A66C2; }
         </span>
 
         <div class="fl-block fl-list" data-delay="900">
-          <span class="fl-list-item">Hundreds of creators went from hundreds to thousands to lakhs of followers. Then from thousands to millions.</span>
-          <span class="fl-list-item">Brands that were once unknown found audiences as if they were already made for them.</span>
+          <span class="fl-list-item">Creators went from hundreds to thousands to lakhs of followers, and then from thousands to millions.</span>
+          <span class="fl-list-item">Brands that were once unknown began finding audiences that felt like they were already meant for them.</span>
         </div>
 
         <span class="fl-block fl-conviction" data-delay="1000">
-          And a part of me watched this happen.
+          And I wasn’t just watching this happen.
         </span>
 
         <span class="fl-block fl-conviction" data-delay="1100">
-          A part of me knew I was making it happen.
+          I knew I was part of the reason it was happening.
         </span>
 
         <span class="fl-block fl-pivot" data-delay="1200">
-          That was when it became real. That’s when I finally made a call.
+          That was when it became undeniable. That’s when I finally made a call.
         </span>
 
         <span class="fl-block fl-build" data-delay="1300">
@@ -2231,7 +2231,6 @@ setTimeout(() => {
     '.rcard':       'View',
     '.testi-card':  'Read',
     '.ocard-stack': 'Details',
-    '.logo-slot':   'Brand',
     '.s09-scard':   'Visit',
     '.mega-cta':    'Book',
     '.carr-btn':    'Slide',
@@ -2241,6 +2240,14 @@ setTimeout(() => {
   };
 
   function getLabel(el) {
+    const logoSlot = el.closest('.logo-slot');
+    if (logoSlot) {
+      const img = logoSlot.querySelector('img');
+      if (img && img.alt) return img.alt;
+      const ph = logoSlot.querySelector('.logo-slot-ph');
+      if (ph) return ph.textContent;
+    }
+    
     for (const [sel, lbl] of Object.entries(LABELS)) {
       if (el.closest(sel)) return lbl;
     }
@@ -2646,7 +2653,8 @@ function toggleFaq(btn) {
 
   function buildSVG() {
     const dark = isDark();
-    const stroke = dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.07)';
+    // Perfectly subtle grid lines for the deep premium black background
+    const stroke = dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
     // Pattern tile: 2*stepX wide, stepY tall — contains 2 offset rows
     const pw = stepX * 2;
     const ph = stepY;
