@@ -281,8 +281,8 @@ body.light .theme-icon-sun { display: none; }
   font-weight: 700;
   color: var(--text-main);
   display: inline-block;
-  padding: 0.2em 0.2em; /* Expands background bounding box to prevent clipping cursive loops */
-  margin: -0.2em 0; /* Offsets the padding so it doesn't break line spacing */
+  padding: 0.2em 0.2em;
+  margin: -0.2em 0;
   transform-origin: center;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1.3), color 0.3s;
 }
@@ -337,7 +337,7 @@ body.light .theme-icon-sun { display: none; }
 @keyframes roll-fwd { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes roll-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
-/* Logo slot base */
+/* ── LOGO SLOT BASE ── */
 .logo-slot {
   width: 140px; height: 80px; position: relative; overflow: hidden;
   border-radius: 12px; margin: 0 12px;
@@ -355,25 +355,25 @@ body.light .theme-icon-sun { display: none; }
   z-index: 10;
 }
 
-/* DARK MODE — logos grayscale + brightened so they're visible on black */
+/* ── DARK MODE: invert dark logos → they appear white on black cards ── */
 .logo-slot img {
   width: 100%; height: 100%; object-fit: contain; padding: 12px;
-  filter: grayscale(100%) brightness(1.8) contrast(0.85);
+  filter: grayscale(100%) invert(1) brightness(0.88) contrast(0.9);
   transition: filter 0.4s var(--ease), transform 0.4s var(--ease);
   mix-blend-mode: normal;
 }
-/* On hover → full colour */
+/* On hover → restore full colour (undo invert) */
 .logo-slot:hover img {
-  filter: grayscale(0%) brightness(1) contrast(1);
+  filter: grayscale(0%) invert(0) brightness(1) contrast(1);
   transform: scale(1.1);
 }
 
-/* LIGHT MODE — logos grayscale + darkened so they're visible on white */
+/* ── LIGHT MODE: logos are naturally dark, just desaturate ── */
 body.light .logo-slot img {
-  filter: grayscale(100%) brightness(0.3) contrast(1.1);
+  filter: grayscale(100%) invert(0) brightness(0.15) contrast(1.2);
 }
 body.light .logo-slot:hover img {
-  filter: grayscale(0%) brightness(1) contrast(1);
+  filter: grayscale(0%) invert(0) brightness(1) contrast(1);
 }
 
 /* Light mode slot background */
@@ -413,13 +413,10 @@ body.light .logo-slot:hover {
   border-color: var(--accent); 
   box-shadow: var(--shadow-brutal); 
 }
-/* Stacking physics */
 .ocard-stack:nth-child(1) { top: 120px; z-index: 10; }
 .ocard-stack:nth-child(2) { top: 136px; z-index: 11; }
 .ocard-stack:nth-child(3) { top: 152px; z-index: 12; }
 .ocard-stack:nth-child(4) { top: 168px; z-index: 13; }
-
-/* Scale transition is driven by JS — smooth feel */
 .ocard-stack { will-change: transform; }
 
 .ocard-stack-top { display: flex; flex-direction: column; gap: 24px; }
@@ -521,7 +518,6 @@ body.light .logo-slot:hover {
 }
 .badge-thumb, .eye-icon { width: 22px; height: 22px; color: var(--accent); transition: transform 0.3s, color 0.3s; }
 
-/* Playful Hover Animations for Badges */
 @keyframes anim-eye {
   0%, 100% { transform: scale(1.1) scaleY(1); }
   50% { transform: scale(1.1) scaleY(0.2); }
@@ -575,7 +571,6 @@ body.light .logo-slot:hover {
 #s09 { padding: 100px 0; }
 .s09-inner { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 var(--pad); display: flex; flex-direction: column; gap: 32px; }
 
-/* Inverted Brutalist Footer Block */
 .s09-statement { 
   background: var(--accent); 
   border: var(--border-w) solid var(--line); 
@@ -607,7 +602,6 @@ body.light .logo-slot:hover {
 .s09-dc-link svg { width: 16px; height: 16px; color: #FFFFFF; flex-shrink: 0; }
 .s09-dc-link:hover { opacity: 0.7; }
 
-/* Social cards — 2 col, portfolio centered below */
 .s09-socials { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .s09-socials .s09-scard:nth-child(3):last-child { 
   grid-column: 1 / -1; 
@@ -617,7 +611,6 @@ body.light .logo-slot:hover {
   align-items: center;
   text-align: center;
 }
-/* Mobile — all cards full width, portfolio full width too */
 @media (max-width: 640px) { 
   .s09-socials { grid-template-columns: 1fr 1fr; gap: 12px; }
   .s09-socials .s09-scard:nth-child(3):last-child { 
@@ -636,7 +629,6 @@ body.light .logo-slot:hover {
 .s09-scard-icon { width: 40px; height: 40px; color: var(--accent); transition: color 0.3s, transform 0.3s; }
 .s09-scard-arrow { position: absolute; bottom: 24px; right: 24px; font-size: 16px; color: var(--accent); opacity: 0; transform: translate(-6px, 6px); transition: opacity 0.3s, transform 0.3s, color 0.3s; }
 
-/* Proper dynamic hover text/icon flipping */
 .s09-scard:hover .s09-scard-name { color: var(--accent); }
 .s09-scard:hover .s09-scard-icon { color: var(--text-main); transform: scale(1.1) rotate(-6deg); }
 .s09-scard:hover .s09-scard-arrow { opacity: 1; color: var(--text-main); transform: translate(0, 0); }
@@ -650,24 +642,115 @@ body.light #s05-title { color: #000000; }
 body.light #s05-sub { color: #0A66C2; }
 
 /* ═══════════════════════════════════════════════════════════════
+   SCROLL-ACTIVATED STATES
+   Mirror hover states, triggered by JS on scroll proximity.
+   The JS removes these on real mouseover so :hover always wins.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* s02 — play-word auto colour flash */
+.play-word.auto-active {
+  transform: scale(1.18) rotate(-6deg) !important;
+  animation-play-state: paused;
+  z-index: 10; position: relative;
+}
+.play-word.ig.auto-active {
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+}
+.play-word.in.auto-active {
+  background: linear-gradient(45deg, #0077b5, #0A66C2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+}
+.play-word.yt.auto-active {
+  background: linear-gradient(45deg, #FF0000, #C4302B);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+}
+.play-word.web.auto-active {
+  background: linear-gradient(45deg, #10B981, #3B82F6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* s03 — logo slot auto colour reveal */
+.logo-slot.auto-active {
+  transform: translate(-2px, -2px) scale(1.07);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-brutal);
+  background: var(--bg);
+  z-index: 10;
+}
+.logo-slot.auto-active img {
+  filter: grayscale(0%) invert(0) brightness(1) contrast(1) !important;
+  transform: scale(1.1);
+}
+body.light .logo-slot.auto-active img {
+  filter: grayscale(0%) invert(0) brightness(1) contrast(1) !important;
+}
+
+/* s04 — active offer card: price bounce + accent border */
+.ocard-stack.auto-active {
+  border-color: var(--accent) !important;
+  box-shadow: var(--shadow-brutal) !important;
+}
+.ocard-stack.auto-active .ocard-stack-price {
+  transform: scale(1.15) rotate(-5deg);
+  color: var(--accent);
+}
+
+/* s05 — stack card highlight cycle */
+.stack-card.auto-active {
+  background: var(--accent);
+}
+.stack-card.auto-active .dc-num,
+.stack-card.auto-active .dc-title,
+.stack-card.auto-active .dc-desc {
+  color: #FFFFFF;
+}
+
+/* s07 — badge pulse on active carousel card */
+@keyframes auto-thumb {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25%  { transform: scale(1.2) rotate(-12deg); }
+  75%  { transform: scale(1.2) rotate(12deg); }
+}
+@keyframes auto-eye {
+  0%, 100% { transform: scale(1.1) scaleY(1); }
+  50%  { transform: scale(1.1) scaleY(0.15); }
+}
+.rcard.auto-active .badge-thumb { animation: auto-thumb 0.7s ease-in-out infinite; color: var(--text-main); }
+.rcard.auto-active .eye-icon    { animation: auto-eye  0.9s ease-in-out infinite; color: var(--text-main); }
+.rcard.auto-active {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-brutal);
+}
+
+/* s08 — testimonial card highlight */
+.testi-card.auto-active {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-brutal);
+  transform: translate(-4px, -4px);
+  z-index: 2;
+}
+
+/* s09 — social card sequential reveal */
+.s09-scard.auto-active {
+  transform: translate(-4px, -4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-brutal);
+}
+.s09-scard.auto-active .s09-scard-name { color: var(--accent); }
+.s09-scard.auto-active .s09-scard-icon { color: var(--text-main); transform: scale(1.1) rotate(-6deg); }
+.s09-scard.auto-active .s09-scard-arrow { opacity: 1; color: var(--text-main); transform: translate(0,0); }
+
+/* ═══════════════════════════════════════════════════════════════
    TABLET (max-width: 1024px)
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  /* Nav */
   .top-nav-btn { padding: 8px 16px; font-size: 10px; }
-
-  /* Hero */
   .s01-hero { padding: 90px var(--pad) 80px; }
-
-  /* Offers */
   .s04-stack-wrap { max-width: 100%; }
   .ocard-stack { padding: 36px 36px; }
-
-  /* Results */
   .res-hero { padding: 80px var(--pad) 28px; }
   .rcard.dashboard { height: clamp(220px, 36svh, 320px); width: clamp(220px, 32vw, 320px); }
-
-  /* Contact */
   .s09-inner { max-width: 100%; }
   .s09-statement { padding: clamp(36px, 5vw, 60px); }
   .s09-headline { font-size: clamp(32px, 4.5vw, 60px); }
@@ -677,39 +760,24 @@ body.light #s05-sub { color: #0A66C2; }
    MOBILE (max-width: 768px)
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Global spacing */
   :root { --pad: clamp(20px, 5vw, 40px); }
-
-  /* Scroll snap off on mobile — feels better */
   html { scroll-snap-type: none; }
-
-  /* Hide noise on mobile for perf */
   .noise-bg { display: none; }
-
-  /* Nav */
   .top-nav-inner { padding: 14px var(--pad); }
   .top-nav-logo-line1 { font-size: 16px; }
   .top-nav-btn { display: none; }
-
-  /* Hero */
   .s01-hero { padding: 100px var(--pad) 100px; }
   .s01-line1 { font-size: clamp(48px, 14vw, 80px); }
   .s01-bb2 { font-size: clamp(36px, 11vw, 70px); }
   .s01-line3 { font-size: clamp(20px, 6vw, 48px); }
   #s01::after { font-size: clamp(180px, 48vw, 320px); }
-
-  /* Who we are */
   .s02-inner { padding: 80px var(--pad) 60px; }
   .s02-h { font-size: clamp(52px, 14vw, 90px); }
   .s02-sub { font-size: clamp(20px, 5vw, 32px); }
   .s02-pitch { font-size: clamp(16px, 4vw, 22px); }
-
-  /* Brands */
   .s03-head { padding: 0 var(--pad); }
   .s03-h1 { font-size: clamp(40px, 11vw, 70px); }
   .logo-slot { width: 100px; height: 58px; margin: 0 8px; }
-
-  /* Offers */
   #s04 { padding-top: 70px; padding-bottom: 8vh; }
   .s04-header { padding: 0 var(--pad); margin-bottom: 40px; }
   #s04-title { font-size: clamp(40px, 11vw, 70px); }
@@ -723,13 +791,9 @@ body.light #s05-sub { color: #0A66C2; }
   .ocard-stack-name { font-size: clamp(20px, 5vw, 26px); }
   .ocard-stack-price { font-size: clamp(36px, 9vw, 52px); }
   .ocard-stack-desc { font-size: 13px; max-width: 100%; }
-
-  /* How we work */
   #s05 { padding: 80px var(--pad); }
   #s05-title { font-size: clamp(40px, 11vw, 70px); }
   .stack-card { padding: 32px 20px; }
-
-  /* Results */
   .res-hero { padding: 70px var(--pad) 20px; }
   .res-h1 { font-size: clamp(40px, 11vw, 80px); }
   .res-h2 { font-size: clamp(28px, 7.5vw, 56px); }
@@ -739,14 +803,10 @@ body.light #s05-sub { color: #0A66C2; }
   .carr-btn { width: 44px; height: 44px; font-size: 18px; }
   .carr-prev { left: 8px; }
   .carr-next { right: 8px; }
-
-  /* Testimonials */
   .testi-head { padding: 80px var(--pad) 32px; }
   .testi-h1 { font-size: clamp(48px, 13vw, 90px); }
   .testi-h2 { font-size: clamp(32px, 9vw, 64px); }
   .testi-card { width: 320px; padding: 28px 28px; }
-
-  /* Contact */
   #s09 { padding: 80px 0; }
   .s09-statement { padding: 36px 28px; border-radius: 18px; }
   .s09-headline { font-size: clamp(28px, 7vw, 48px); }
@@ -755,8 +815,6 @@ body.light #s05-sub { color: #0A66C2; }
   .s09-socials .s09-scard:nth-child(3):last-child { grid-column: 1 / -1; max-width: calc(50% - 6px); margin: 0 auto; align-items: center; text-align: center; }
   .s09-scard { padding: 24px 20px; }
   .s09-scard-name { font-size: 18px; }
-
-  /* Theme toggle */
   #theme-toggle { bottom: 16px; left: 16px; }
 }
 
@@ -768,18 +826,13 @@ body.light #s05-sub { color: #0A66C2; }
   .s01-line1 { font-size: clamp(42px, 15vw, 64px); }
   .s01-bb2 { font-size: clamp(30px, 12vw, 54px); }
   .s01-line3 { font-size: clamp(18px, 6.5vw, 36px); white-space: normal; }
-
   .s02-h { font-size: clamp(44px, 16vw, 72px); }
-
   #s04-title { font-size: clamp(36px, 13vw, 60px); }
   .ocard-stack { padding: 24px 16px; }
   .ocard-stack-top { gap: 16px; }
-
   .testi-card { width: 280px; padding: 24px 20px; }
-
   .s09-statement { padding: 28px 20px; }
   .mega-cta { font-size: 16px; padding: 14px 24px; }
-
   .s01-ticker-item { font-size: 11px; padding: 6px 12px; }
 }
 </style>
@@ -1071,7 +1124,6 @@ body.light #s05-sub { color: #0A66C2; }
   </div>
 </section>
 
-
 <section class="s res-slide" id="s07">
   <div class="res-hero r d1">
     <span class="bb res-h1">REACH &amp;</span>
@@ -1154,9 +1206,9 @@ body.light #s05-sub { color: #0A66C2; }
         </a>
         <div class="s09-direct-contact">
           <span class="s09-dc-label">Or reach out directly</span>
-          <a href="mailto:hello@hepzcontenthouse.com" class="s09-dc-link">
+          <a href="/cdn-cgi/l/email-protection#a5cdc0c9c9cae5cdc0d5dfc6cacbd1c0cbd1cdcad0d6c08bc6cac8" class="s09-dc-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            hello@hepzcontenthouse.com
+            <span class="__cf_email__" data-cfemail="c2aaa7aeaead82aaa7b2b8a1adacb6a7acb6aaadb7b1a7eca1adaf">[email&#160;protected]</span>
           </a>
           <a href="tel:+919790429699" class="s09-dc-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1186,7 +1238,7 @@ body.light #s05-sub { color: #0A66C2; }
   </div>
 </section>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const topNav = document.querySelector('.top-nav');
 const navLinks = document.querySelectorAll('.top-nav-link[data-section], .nav-drawer-link[data-section]');
 window.addEventListener('scroll', () => {
@@ -1259,12 +1311,11 @@ const animIO = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('in');
-      animIO.unobserve(e.target); // fire once
+      animIO.unobserve(e.target);
     }
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 animEls.forEach(el => animIO.observe(el));
-// Trigger first section immediately
 setTimeout(() => {
   document.querySelectorAll('#s01 .r, #s02 .r').forEach(el => el.classList.add('in'));
 }, 60);
@@ -1279,7 +1330,6 @@ setTimeout(() => {
   let mx = -200, my = -200, rx = -200, ry = -200;
   let raf;
 
-  // Smooth ring follow
   function lerp(a, b, t) { return a + (b - a) * t; }
   function loop() {
     rx = lerp(rx, mx, 0.12);
@@ -1303,7 +1353,6 @@ setTimeout(() => {
   document.addEventListener('mouseleave', () => { cr.style.opacity = '0'; ring.style.opacity = '0'; });
   document.addEventListener('mouseenter', () => { cr.style.opacity = ''; ring.style.opacity = ''; });
 
-  // Hover labels for interactive elements
   const LABELS = {
     'a':            'Visit',
     'button':       'Click',
@@ -1412,29 +1461,24 @@ function slide(sectionId, dir) {
   const cards = [...document.querySelectorAll('.ocard-stack')];
   if (!stackWrap || cards.length === 0) return;
 
-  const SCALE_PER_CARD = 0.04; // how much each buried card shrinks
-  const BLUR_PER_CARD  = 1.5;  // px blur per layer buried
+  const SCALE_PER_CARD = 0.04;
+  const BLUR_PER_CARD  = 1.5;
 
   function updateStack() {
     const wrapTop = stackWrap.getBoundingClientRect().top;
     const scrollY = window.scrollY;
-    const navH = 120; // matches first card's top offset
+    const navH = 120;
 
     cards.forEach((card, i) => {
       const cardTop = card.getBoundingClientRect().top;
-
-      // How far has this card scrolled past its sticky point?
-      // progress 0 = just stuck, 1 = next card fully on top
       const cardStickyTop = parseInt(getComputedStyle(card).top) || navH;
-      const distPastSticky = navH + cardStickyTop - cardTop; // positive when stuck
+      const distPastSticky = navH + cardStickyTop - cardTop;
 
-      // Count how many cards are currently "on top of" this one
       let layersAbove = 0;
       cards.forEach((other, j) => {
         if (j <= i) return;
         const otherTop = other.getBoundingClientRect().top;
         const otherStickyTop = parseInt(getComputedStyle(other).top) || navH;
-        // other card has reached its sticky position
         if (otherTop <= otherStickyTop + 2) layersAbove++;
       });
 
@@ -1457,6 +1501,286 @@ function slide(sectionId, dir) {
   window.addEventListener('scroll', updateStack, { passive: true });
   window.addEventListener('resize', updateStack, { passive: true });
   updateStack();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL-ACTIVATED ANIMATIONS ENGINE
+// Each section gets its own IntersectionObserver + interval cycle.
+// Real :hover always takes priority — JS strips auto-active on
+// mouseenter and restores the cycle on mouseleave.
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+  // ── Utility: cycle through an array of elements, adding/removing
+  //    .auto-active one at a time on a given interval.
+  //    Returns a controller { start, stop }.
+  function makeCycler(getEls, interval, onActivate, onDeactivate) {
+    let timer = null, idx = 0;
+    function tick() {
+      const els = getEls();
+      if (!els.length) return;
+      idx = idx % els.length;
+      els.forEach((el, i) => {
+        if (i === idx) {
+          el.classList.add('auto-active');
+          if (onActivate) onActivate(el, i);
+        } else {
+          el.classList.remove('auto-active');
+          if (onDeactivate) onDeactivate(el, i);
+        }
+      });
+      idx = (idx + 1) % els.length;
+    }
+    return {
+      start() { if (timer) return; tick(); timer = setInterval(tick, interval); },
+      stop()  { clearInterval(timer); timer = null; },
+      reset() { (getEls()).forEach(el => el.classList.remove('auto-active')); idx = 0; }
+    };
+  }
+
+  // ── Utility: observe a section, start cycler when ≥threshold visible,
+  //    stop + reset when it leaves. Returns the observer.
+  function watchSection(sectionId, cycler, threshold) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) cycler.start();
+        else { cycler.stop(); cycler.reset(); }
+      });
+    }, { threshold: threshold || 0.2 });
+    io.observe(section);
+  }
+
+  // ── Utility: prevent auto-active from fighting real hover.
+  //    On mouseenter remove auto-active; on mouseleave the cycler
+  //    will naturally re-apply it on its next tick.
+  function yieldToHover(els) {
+    els.forEach(el => {
+      el.addEventListener('mouseenter', () => el.classList.remove('auto-active'));
+    });
+  }
+
+  // ─────────────────────────────────────────────
+  // s02 — Cycle through the 4 platform play-words
+  // ─────────────────────────────────────────────
+  (function() {
+    const words = [...document.querySelectorAll('#s02 .play-word')];
+    if (!words.length) return;
+    yieldToHover(words);
+    const cycler = makeCycler(() => words, 1400);
+    watchSection('s02', cycler, 0.4);
+  })();
+
+  // ─────────────────────────────────────────────
+  // s03 — Flash random visible logos to full colour
+  // Uses a different approach: pick a random logo-slot
+  // inside each ticker viewport every N ms.
+  // ─────────────────────────────────────────────
+  (function() {
+    const mwrap = document.querySelector('.logo-mwrap');
+    if (!mwrap) return;
+
+    let timers = [];
+    function getVisibleSlots() {
+      const wrapRect = mwrap.getBoundingClientRect();
+      return [...document.querySelectorAll('.logo-slot')].filter(slot => {
+        const r = slot.getBoundingClientRect();
+        return r.left >= wrapRect.left - 10 && r.right <= wrapRect.right + 10;
+      });
+    }
+
+    function flashRandom() {
+      document.querySelectorAll('.logo-slot.auto-active').forEach(el => el.classList.remove('auto-active'));
+      const visible = getVisibleSlots();
+      if (!visible.length) return;
+      // Pick 2 random slots from visible ones
+      const picks = visible.sort(() => Math.random() - 0.5).slice(0, 2);
+      picks.forEach(slot => slot.classList.add('auto-active'));
+    }
+
+    yieldToHover([...document.querySelectorAll('.logo-slot')]);
+
+    let running = false;
+    function start() {
+      if (running) return; running = true;
+      flashRandom();
+      timers.push(setInterval(flashRandom, 900));
+    }
+    function stop() {
+      running = false;
+      timers.forEach(clearInterval); timers = [];
+      document.querySelectorAll('.logo-slot.auto-active').forEach(el => el.classList.remove('auto-active'));
+    }
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? start() : stop());
+    }, { threshold: 0.1 });
+    io.observe(mwrap);
+  })();
+
+  // ─────────────────────────────────────────────
+  // s04 — Highlight whichever offer card is the
+  // current "top" sticky card (the frontmost one).
+  // Piggybacks on the existing scroll stack logic.
+  // ─────────────────────────────────────────────
+  (function() {
+    const cards = [...document.querySelectorAll('.ocard-stack')];
+    if (!cards.length) return;
+    yieldToHover(cards);
+
+    function updateActiveCard() {
+      // The frontmost card is the one with the highest z-index
+      // that has NOT yet had the next card land on top of it.
+      // We detect this by: card is sticky (≤ its top offset from viewport),
+      // and no card above it is also sticky yet.
+      let frontmost = null;
+      cards.forEach((card, i) => {
+        const top = card.getBoundingClientRect().top;
+        const stickyTop = parseInt(getComputedStyle(card).top) || 120;
+        const isStuck = top <= stickyTop + 4;
+        const isBeingCovered = cards.some((other, j) => {
+          if (j <= i) return false;
+          const ot = other.getBoundingClientRect().top;
+          const os = parseInt(getComputedStyle(other).top) || 120;
+          return ot <= os + 4;
+        });
+        if (isStuck && !isBeingCovered) frontmost = card;
+      });
+      // If nothing is stuck, pick first card in view
+      if (!frontmost) {
+        cards.forEach(card => {
+          const r = card.getBoundingClientRect();
+          if (r.top < window.innerHeight * 0.8 && r.bottom > 0) frontmost = frontmost || card;
+        });
+      }
+      cards.forEach(c => c.classList.remove('auto-active'));
+      if (frontmost && !frontmost.matches(':hover')) frontmost.classList.add('auto-active');
+    }
+
+    let s04Active = false;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { s04Active = e.isIntersecting; });
+    }, { threshold: 0.05 });
+    const s04 = document.getElementById('s04');
+    if (s04) io.observe(s04);
+
+    window.addEventListener('scroll', () => {
+      if (s04Active) updateActiveCard();
+    }, { passive: true });
+    updateActiveCard();
+  })();
+
+  // ─────────────────────────────────────────────
+  // s05 — Cycle through the 4 execution stack cards
+  // ─────────────────────────────────────────────
+  (function() {
+    const cards = [...document.querySelectorAll('.stack-card')];
+    if (!cards.length) return;
+    yieldToHover(cards);
+    const cycler = makeCycler(() => cards, 1600);
+    watchSection('s05', cycler, 0.3);
+  })();
+
+  // ─────────────────────────────────────────────
+  // s07 — Pulse badge icons on whichever carousel
+  // card is currently centred in the viewport
+  // ─────────────────────────────────────────────
+  (function() {
+    const track = document.getElementById('track-s07');
+    if (!track) return;
+
+    function getActiveCard() {
+      const vp = document.getElementById('vp-s07');
+      if (!vp) return null;
+      const vpRect = vp.getBoundingClientRect();
+      const vpCenter = vpRect.left + vpRect.width / 2;
+      let best = null, bestDist = Infinity;
+      [...track.querySelectorAll('.rcard')].forEach(card => {
+        const r = card.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const dist = Math.abs(cardCenter - vpCenter);
+        if (dist < bestDist) { bestDist = dist; best = card; }
+      });
+      return best;
+    }
+
+    let rafId = null;
+    function pulse() {
+      const active = getActiveCard();
+      [...track.querySelectorAll('.rcard')].forEach(c => c.classList.remove('auto-active'));
+      if (active && !active.matches(':hover')) active.classList.add('auto-active');
+      rafId = requestAnimationFrame(pulse);
+    }
+
+    yieldToHover([...document.querySelectorAll('#s07 .rcard')]);
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { if (!rafId) pulse(); }
+        else {
+          cancelAnimationFrame(rafId); rafId = null;
+          [...track.querySelectorAll('.rcard')].forEach(c => c.classList.remove('auto-active'));
+        }
+      });
+    }, { threshold: 0.2 });
+    const s07 = document.getElementById('s07');
+    if (s07) io.observe(s07);
+  })();
+
+  // ─────────────────────────────────────────────
+  // s08 — Highlight the testimonial card nearest
+  // the horizontal centre of each scrolling row
+  // ─────────────────────────────────────────────
+  (function() {
+    const rows = [...document.querySelectorAll('.testi-mrow')];
+    if (!rows.length) return;
+    yieldToHover([...document.querySelectorAll('.testi-card')]);
+
+    function updateTesti() {
+      rows.forEach(row => {
+        const rowRect = row.parentElement.getBoundingClientRect(); // .testi-mwrap
+        const center = rowRect.left + rowRect.width / 2;
+        let best = null, bestDist = Infinity;
+        [...row.querySelectorAll('.testi-card')].forEach(card => {
+          const r = card.getBoundingClientRect();
+          const cardCenter = r.left + r.width / 2;
+          const dist = Math.abs(cardCenter - center);
+          if (dist < bestDist) { bestDist = dist; best = card; }
+        });
+        [...row.querySelectorAll('.testi-card')].forEach(c => c.classList.remove('auto-active'));
+        if (best && !best.matches(':hover')) best.classList.add('auto-active');
+      });
+    }
+
+    let rafId = null;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          function loop() { updateTesti(); rafId = requestAnimationFrame(loop); }
+          if (!rafId) loop();
+        } else {
+          cancelAnimationFrame(rafId); rafId = null;
+          document.querySelectorAll('.testi-card.auto-active').forEach(c => c.classList.remove('auto-active'));
+        }
+      });
+    }, { threshold: 0.15 });
+    const s08 = document.getElementById('s08');
+    if (s08) io.observe(s08);
+  })();
+
+  // ─────────────────────────────────────────────
+  // s09 — Stagger-reveal the 3 social cards on
+  // scroll-in, then cycle through them
+  // ─────────────────────────────────────────────
+  (function() {
+    const scards = [...document.querySelectorAll('.s09-scard')];
+    if (!scards.length) return;
+    yieldToHover(scards);
+    const cycler = makeCycler(() => scards, 1200);
+    watchSection('s09', cycler, 0.3);
+  })();
+
 })();
 
 const themeBtn = document.getElementById('theme-toggle');
