@@ -607,8 +607,17 @@ body.light .logo-slot:hover {
 .s09-dc-link svg { width: 16px; height: 16px; color: #FFFFFF; flex-shrink: 0; }
 .s09-dc-link:hover { opacity: 0.7; }
 
-.s09-socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-@media (max-width: 640px) { .s09-socials { grid-template-columns: 1fr; gap: 16px; } }
+.s09-socials { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.s09-socials .s09-scard:nth-child(3):last-child { 
+  grid-column: 1 / -1; 
+  max-width: calc(50% - 12px); 
+  margin: 0 auto; 
+  width: 100%;
+}
+@media (max-width: 640px) { 
+  .s09-socials { grid-template-columns: 1fr; gap: 16px; } 
+  .s09-socials .s09-scard:nth-child(3):last-child { grid-column: 1; max-width: 100%; }
+}
 .s09-scard { 
   background: var(--bg-card); border: var(--border-w) solid var(--line); border-radius: 16px; padding: 32px 28px; 
   text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; position: relative; 
@@ -632,6 +641,140 @@ body.light #s04-sub { color: #000000; }
 body.light #s05-title { color: #000000; }
 body.light #s05-sub { color: #0A66C2; }
 
+/* ═══════════════════════════════════════════════════════════════
+   TABLET (max-width: 1024px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  /* Nav */
+  .top-nav-btn { padding: 8px 16px; font-size: 10px; }
+
+  /* Hero */
+  .s01-hero { padding: 90px var(--pad) 80px; }
+
+  /* Offers */
+  .s04-stack-wrap { max-width: 100%; }
+  .ocard-stack { padding: 36px 36px; }
+
+  /* Results */
+  .res-hero { padding: 80px var(--pad) 28px; }
+  .rcard.dashboard { height: clamp(220px, 36svh, 320px); width: clamp(220px, 32vw, 320px); }
+
+  /* Contact */
+  .s09-inner { max-width: 100%; }
+  .s09-statement { padding: clamp(36px, 5vw, 60px); }
+  .s09-headline { font-size: clamp(32px, 4.5vw, 60px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE (max-width: 768px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Global spacing */
+  :root { --pad: clamp(20px, 5vw, 40px); }
+
+  /* Scroll snap off on mobile — feels better */
+  html { scroll-snap-type: none; }
+
+  /* Hide noise on mobile for perf */
+  .noise-bg { display: none; }
+
+  /* Nav */
+  .top-nav-inner { padding: 14px var(--pad); }
+  .top-nav-logo-line1 { font-size: 16px; }
+  .top-nav-btn { display: none; }
+
+  /* Hero */
+  .s01-hero { padding: 100px var(--pad) 100px; }
+  .s01-line1 { font-size: clamp(48px, 14vw, 80px); }
+  .s01-bb2 { font-size: clamp(36px, 11vw, 70px); }
+  .s01-line3 { font-size: clamp(20px, 6vw, 48px); }
+  #s01::after { font-size: clamp(180px, 48vw, 320px); }
+
+  /* Who we are */
+  .s02-inner { padding: 80px var(--pad) 60px; }
+  .s02-h { font-size: clamp(52px, 14vw, 90px); }
+  .s02-sub { font-size: clamp(20px, 5vw, 32px); }
+  .s02-pitch { font-size: clamp(16px, 4vw, 22px); }
+
+  /* Brands */
+  .s03-head { padding: 0 var(--pad); }
+  .s03-h1 { font-size: clamp(40px, 11vw, 70px); }
+  .logo-slot { width: 100px; height: 58px; margin: 0 8px; }
+
+  /* Offers */
+  #s04 { padding-top: 70px; padding-bottom: 8vh; }
+  .s04-header { padding: 0 var(--pad); margin-bottom: 40px; }
+  #s04-title { font-size: clamp(40px, 11vw, 70px); }
+  #s04-sub { font-size: clamp(18px, 4.5vw, 28px); }
+  .s04-stack-wrap { padding: 0 var(--pad) 8vh; gap: 20px; }
+  .ocard-stack { padding: 28px 20px; border-radius: 14px; }
+  .ocard-stack:nth-child(1) { top: 72px; }
+  .ocard-stack:nth-child(2) { top: 84px; }
+  .ocard-stack:nth-child(3) { top: 96px; }
+  .ocard-stack:nth-child(4) { top: 108px; }
+  .ocard-stack-name { font-size: clamp(20px, 5vw, 26px); }
+  .ocard-stack-price { font-size: clamp(36px, 9vw, 52px); }
+  .ocard-stack-desc { font-size: 13px; max-width: 100%; }
+
+  /* How we work */
+  #s05 { padding: 80px var(--pad); }
+  #s05-title { font-size: clamp(40px, 11vw, 70px); }
+  .stack-card { padding: 32px 20px; }
+
+  /* Results */
+  .res-hero { padding: 70px var(--pad) 20px; }
+  .res-h1 { font-size: clamp(40px, 11vw, 80px); }
+  .res-h2 { font-size: clamp(28px, 7.5vw, 56px); }
+  .res-track { gap: 16px; padding: 20px var(--pad) 32px; }
+  .rcard.portrait { height: clamp(320px, 70svh, 480px); }
+  .rcard.dashboard { height: clamp(200px, 45vw, 280px); width: clamp(200px, 72vw, 300px); }
+  .carr-btn { width: 44px; height: 44px; font-size: 18px; }
+  .carr-prev { left: 8px; }
+  .carr-next { right: 8px; }
+
+  /* Testimonials */
+  .testi-head { padding: 80px var(--pad) 32px; }
+  .testi-h1 { font-size: clamp(48px, 13vw, 90px); }
+  .testi-h2 { font-size: clamp(32px, 9vw, 64px); }
+  .testi-card { width: 320px; padding: 28px 28px; }
+
+  /* Contact */
+  #s09 { padding: 80px 0; }
+  .s09-statement { padding: 36px 28px; border-radius: 18px; }
+  .s09-headline { font-size: clamp(28px, 7vw, 48px); }
+  .mega-cta { font-size: 18px; padding: 16px 32px; }
+  .s09-socials { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .s09-socials .s09-scard:nth-child(3):last-child { grid-column: 1 / -1; max-width: calc(50% - 6px); margin: 0 auto; }
+  .s09-scard { padding: 24px 20px; }
+  .s09-scard-name { font-size: 18px; }
+
+  /* Theme toggle */
+  #theme-toggle { bottom: 16px; left: 16px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL MOBILE (max-width: 480px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .s01-hero { padding: 90px var(--pad) 90px; }
+  .s01-line1 { font-size: clamp(42px, 15vw, 64px); }
+  .s01-bb2 { font-size: clamp(30px, 12vw, 54px); }
+  .s01-line3 { font-size: clamp(18px, 6.5vw, 36px); white-space: normal; }
+
+  .s02-h { font-size: clamp(44px, 16vw, 72px); }
+
+  #s04-title { font-size: clamp(36px, 13vw, 60px); }
+  .ocard-stack { padding: 24px 16px; }
+  .ocard-stack-top { gap: 16px; }
+
+  .testi-card { width: 280px; padding: 24px 20px; }
+
+  .s09-socials { grid-template-columns: 1fr; }
+  .s09-statement { padding: 28px 20px; }
+  .mega-cta { font-size: 16px; padding: 14px 24px; }
+
+  .s01-ticker-item { font-size: 11px; padding: 6px 12px; }
+}
 </style>
 </head>
 <body>
@@ -657,7 +800,7 @@ body.light #s05-sub { color: #0A66C2; }
       <div class="top-nav-center">
         <a href="#s02" class="top-nav-link" data-section="s02">About Us</a>
         <a href="#s04" class="top-nav-link" data-section="s04">Offerings</a>
-        <a href="#s06" class="top-nav-link" data-section="s06">Impact</a>
+        <a href="#s07" class="top-nav-link" data-section="s07">Impact</a>
         <a href="#s08" class="top-nav-link" data-section="s08">Testimonials</a>
       </div>
       <a href="https://calendly.com/hello-hepzcontenthouse/30min" target="_blank" rel="noopener" class="top-nav-btn">
@@ -686,12 +829,11 @@ body.light #s05-sub { color: #0A66C2; }
   <div class="nav-drawer-links">
     <a href="#s02" class="nav-drawer-link" data-section="s02">About Us</a>
     <a href="#s04" class="nav-drawer-link" data-section="s04">Offerings</a>
-    <a href="#s06" class="nav-drawer-link" data-section="s06">Impact</a>
+    <a href="#s07" class="nav-drawer-link" data-section="s07">Impact</a>
     <a href="#s08" class="nav-drawer-link" data-section="s08">Testimonials</a>
   </div>
   <div class="nav-drawer-bottom">
     <a href="https://calendly.com/hello-hepzcontenthouse/30min" target="_blank" rel="noopener" class="nav-drawer-cta">Book a call with us</a>
-    <span class="nav-drawer-note">India · US · UK</span>
   </div>
 </div>
 
