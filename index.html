@@ -2,8 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='14' y='4' width='4' height='24' fill='%233B9EFF'/%3E%3Crect x='6' y='10' width='20' height='4' fill='%233B9EFF'/%3E%3C/svg%3E">
+<meta name="inspiration" content="Isaiah 62:4 — You will be called Hephzibah, for the Lord will take delight in you.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEPZ Content House</title>
+
+<!-- SEO -->
+<meta name="description" content="HEPZ Content House builds and scales social media brands for creators, founders, and companies across Instagram, LinkedIn, and YouTube. Strategy, scripting, editing, and community — fully managed.">
+<meta name="keywords" content="social media agency India, LinkedIn personal branding, Instagram growth, content strategy, YouTube management, HEPZ Content House">
+<meta name="robots" content="index, follow">
+<meta name="author" content="HEPZ Content House">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hepzcontenthouse.com">
+<meta property="og:title" content="HEPZ Content House — Social Media Brands That Build Visibility">
+<meta property="og:description" content="We take complete creative and operational ownership — from strategy to execution — for creators and brands that want to be everywhere. Instagram · LinkedIn · YouTube.">
+<meta property="og:image" content="https://hepzcontenthouse.com/image/og-preview.jpg">
+<meta property="og:site_name" content="HEPZ Content House">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEPZ Content House — Social Media Brands That Build Visibility">
+<meta name="twitter:description" content="Strategy, scripting, editing, posting, community. Fully off your plate. Trusted by 30+ brands across Instagram, LinkedIn, and YouTube.">
+<meta name="twitter:image" content="https://hepzcontenthouse.com/image/og-preview.jpg">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://hepzcontenthouse.com">
+<title>† HEPZ Content House</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,8 +44,8 @@
   --bg-card: #0A0A0A;
   --bg-nav: rgba(0, 0, 0, 0.85);
   
-  --accent: #0A66C2;
-  --accent-hover: #084D93;
+  --accent: #3B9EFF;
+  --accent-hover: #1A7FE8;
   --line: rgba(255, 255, 255, 0.15); 
   --border-w: 1px;
   
@@ -111,6 +137,681 @@ a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-
   background-size: 140px 140px;
 }
 body.light .noise-bg { mix-blend-mode: multiply; opacity: 0.08; }
+
+
+/* ── SUBTLE BACKGROUND GRID ──
+   A fixed full-page grid overlay that sits behind all content.
+   Very low opacity — purely textural, never distracting.
+   Adapts colour for dark/light mode via CSS vars.
+   ─────────────────────────────────────────────────────── */
+/* Vesica Piscis — sacred geometry, source of the ichthys fish.
+   Overlapping circles tiled across the full page.
+   The SVG pattern is injected into .grid-bg via JS on load. */
+.grid-bg {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .grid-bg { opacity: 0.55; }
+}
+
+/* ── s10 FAQ — sticky scroll accordion ── */
+#s10 { padding: 100px 0; }
+.s10-inner { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 var(--pad); }
+.s10-head { margin-bottom: 60px; }
+.s10-h1 { font-size: clamp(48px, 9.5vw, 116px); display: block; line-height: 0.9; color: var(--text-main); }
+.s10-h2 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(22px, 3vw, 36px); font-weight: 500; color: var(--accent); display: block; margin-top: 12px; line-height: 1.3; }
+
+/* Each FAQ item is sticky — it pins and the next one slides over it */
+.faq-list { display: flex; flex-direction: column; position: relative; }
+
+.faq-item {
+  position: sticky;
+  background: var(--bg);
+  border-top: var(--border-w) solid var(--line);
+  transition: border-color 0.3s var(--ease);
+  z-index: 1;
+}
+
+/* Stack them with increasing top offsets so they pile up */
+.faq-item:nth-child(1)  { top: 80px;  z-index: 10; }
+.faq-item:nth-child(2)  { top: 82px;  z-index: 11; }
+.faq-item:nth-child(3)  { top: 84px;  z-index: 12; }
+.faq-item:nth-child(4)  { top: 86px;  z-index: 13; }
+.faq-item:nth-child(5)  { top: 88px;  z-index: 14; }
+.faq-item:nth-child(6)  { top: 90px;  z-index: 15; }
+.faq-item:nth-child(7)  { top: 92px;  z-index: 16; }
+.faq-item:nth-child(8)  { top: 94px;  z-index: 17; }
+.faq-item:nth-child(9)  { top: 96px;  z-index: 18; }
+.faq-item:nth-child(10) { top: 98px;  z-index: 19; }
+
+.faq-item.open { border-color: var(--accent); }
+
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 0; gap: 24px; cursor: pointer;
+  background: var(--bg);
+  transition: background 0.3s;
+}
+.faq-q:hover { background: var(--bg); }
+
+.faq-q-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2vw, 22px);
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.35;
+  transition: color 0.3s;
+  flex: 1;
+}
+.faq-item.open .faq-q-text { color: var(--accent); }
+
+.faq-toggle {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  border: var(--border-w) solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 300; color: var(--text-muted);
+  transition: transform 0.4s var(--ease), border-color 0.3s, color 0.3s, background 0.3s;
+  background: var(--bg-card);
+  line-height: 1;
+  user-select: none;
+}
+.faq-item.open .faq-toggle {
+  transform: rotate(45deg);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg);
+}
+
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease);
+  overflow: hidden;
+}
+.faq-item.open .faq-body { grid-template-rows: 1fr; }
+.faq-body-inner {
+  overflow: hidden;
+  padding-bottom: 0;
+  transition: padding-bottom 0.5s var(--ease);
+}
+.faq-item.open .faq-body-inner { padding-bottom: 32px; }
+
+.faq-a {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.85;
+  max-width: 60ch;
+}
+
+/* Last item gets a bottom border */
+.faq-list { border-bottom: var(--border-w) solid var(--line); padding-bottom: 2px; }
+
+@media (max-width: 768px) {
+  #s10 { padding: 80px 0; }
+  .faq-item:nth-child(n) { top: 72px; }
+  .faq-q { padding: 22px 0; }
+  .faq-q-text { font-size: clamp(15px, 4vw, 18px); }
+  .faq-toggle { width: 30px; height: 30px; font-size: 18px; }
+}
+
+
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   s03b — MEET THE FOUNDER
+   Letter with visual rhythm, staggered line animations,
+   faint cross watermark, circular pinned portrait.
+   ═══════════════════════════════════════════════════════════════ */
+
+#s03b {
+  padding: 80px 0 120px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Sacred geometry layer */
+.s03b-sacred {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 680px; height: 680px;
+  pointer-events: none;
+  opacity: 0.038;
+  z-index: 0;
+  color: var(--text-main);
+}
+body.light .s03b-sacred { opacity: 0.052; }
+
+.s03b-inner {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  position: relative;
+  z-index: 1;
+}
+
+.s03b-head { margin-bottom: 48px; }
+.s03b-h1 {
+  font-size: clamp(48px, 9.5vw, 116px);
+  display: block; line-height: 0.9;
+  color: var(--text-main);
+}
+.s03b-h2 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(20px, 2.8vw, 32px);
+  color: var(--accent);
+  display: block; margin-top: 10px; line-height: 1.3;
+}
+
+/* ── The letter paper ── */
+.founder-letter {
+  position: relative;
+  overflow: visible;
+  /* Paper background — warm in light, deep in dark */
+  background: var(--bg-card);
+  border-radius: 3px;
+  /* Three-layer border: outer border, gap, inner rule */
+  border: var(--border-w) solid var(--line);
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 0 0 10px var(--bg-card),
+    inset 0 0 0 11px rgba(255,255,255,0.06);
+  padding: 72px 72px 60px 68px;
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s;
+}
+body.light .founder-letter {
+  background: #FAFAF7;
+  box-shadow:
+    0 6px 32px rgba(0,0,0,0.07),
+    0 1px 3px rgba(0,0,0,0.04),
+    inset 0 0 0 10px #FAFAF7,
+    inset 0 0 0 11px rgba(0,0,0,0.06);
+}
+.founder-letter:hover {
+  border-color: rgba(255,255,255,0.18);
+}
+body.light .founder-letter:hover {
+  border-color: rgba(0,0,0,0.14);
+}
+
+/* Faint horizontal ruled lines — letter paper feel */
+.founder-letter::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 35px,
+    var(--line) 35px,
+    var(--line) 36px
+  );
+  opacity: 0.22;
+  pointer-events: none;
+  border-radius: 1px;
+  z-index: 0;
+}
+body.light .founder-letter::after { opacity: 0.14; }
+
+/* Faint cross watermark centred in letter */
+.founder-cross-wm {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 160px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.045;
+  color: var(--accent);
+}
+body.light .founder-cross-wm { opacity: 0.06; }
+
+/* ── Pinned circular portrait ── */
+.founder-pin {
+  position: absolute;
+  top: -64px;
+  right: -44px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.founder-pin-tack {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+.founder-pin-circle {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  box-shadow:
+    0 0 0 5px var(--bg-card),
+    0 0 0 6.5px var(--accent),
+    0 10px 30px rgba(0,0,0,0.4);
+  background: var(--bg-card);
+  transition: transform 0.5s var(--ease), box-shadow 0.4s;
+}
+body.light .founder-pin-circle {
+  box-shadow:
+    0 0 0 5px #FAFAF7,
+    0 0 0 6.5px var(--accent),
+    0 8px 24px rgba(0,0,0,0.14);
+}
+.founder-pin-circle:hover {
+  transform: scale(1.06) rotate(3deg);
+  box-shadow:
+    0 0 0 5px var(--bg-card),
+    0 0 0 6.5px var(--accent),
+    var(--shadow-brutal);
+}
+.founder-pin-circle img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+
+/* ── Letter content sits above watermark/lines ── */
+.founder-letter-body {
+  position: relative;
+  z-index: 1;
+  /* Right padding makes room for the pin on first few lines */
+  padding-right: 100px;
+}
+
+/* ── Line-by-line animation blocks ── */
+.fl-block {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.fl-block.in { opacity: 1; transform: translateY(0); }
+
+/* Opening hook — large, italic, Playfair */
+.fl-hook {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: var(--text-main);
+  line-height: 1.65;
+  display: block;
+  margin-bottom: 32px;
+}
+.fl-hook::first-line {
+  font-size: 1.08em;
+}
+
+/* Bridge — Caveat, warm, personal */
+.fl-bridge {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(19px, 2.1vw, 25px);
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.75;
+  display: block;
+  margin-bottom: 28px;
+}
+
+/* Body paragraph — slightly smaller Caveat */
+.fl-body {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.85;
+  display: block;
+  margin-bottom: 24px;
+}
+
+/* Short punchy lines — displayed as a visual list, slight indent */
+.fl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
+  padding-left: 20px;
+  border-left: 2px solid var(--accent);
+}
+.fl-list-item {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* Conviction line — italicised, muted accent feel */
+.fl-conviction {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(16px, 1.8vw, 21px);
+  color: var(--text-main);
+  line-height: 1.7;
+  display: block;
+  margin-bottom: 28px;
+}
+
+/* The house build paragraph */
+.fl-build {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.85;
+  display: block;
+  margin-bottom: 28px;
+}
+
+/* HEPZ name — Bebas Neue, big, accent, its own breathing room */
+.fl-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 28px;
+}
+
+/* Portfolio line */
+.fl-portfolio {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(15px, 1.7vw, 19px);
+  font-weight: 600;
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 0;
+}
+.fl-portfolio a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 1px;
+  font-weight: 700;
+  transition: opacity 0.3s;
+}
+.fl-portfolio a:hover { opacity: 0.65; }
+
+/* Divider above signature */
+.fl-div {
+  height: 1px;
+  background: var(--line);
+  margin: 32px 0 24px;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: opacity 0.5s var(--ease), transform 0.6s var(--ease);
+}
+.fl-div.in { opacity: 1; transform: scaleX(1); }
+
+/* Signature */
+.fl-sig {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.fl-sig.in { opacity: 1; transform: translateY(0); }
+.fl-sig-name {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  color: var(--accent);
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+  line-height: 1.1;
+}
+.fl-sig-role {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+
+/* ── Playfair-only heading for s03b ── */
+.s03b-h1-pf {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(36px, 7vw, 80px);
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.s03b-h2-pf {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(52px, 10vw, 120px);
+  color: var(--accent);
+  display: block;
+  line-height: 0.88;
+  margin-top: 4px;
+  letter-spacing: -0.02em;
+}
+
+/* ── Rotating blue heart above circle ── */
+.founder-pin-heart {
+  font-size: 22px;
+  display: block;
+  margin-bottom: 6px;
+  animation: heart-spin 3s ease-in-out infinite;
+  transform-origin: center;
+  line-height: 1;
+  filter: hue-rotate(0deg);
+}
+@keyframes heart-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(-15deg) scale(1.15); }
+  50%  { transform: rotate(0deg) scale(1); }
+  75%  { transform: rotate(15deg) scale(1.15); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* ── All letter body text in text-main, no gray ── */
+.fl-body,
+.fl-bridge,
+.fl-build,
+.fl-list-item,
+.fl-hook,
+.fl-portfolio {
+  color: var(--text-main) !important;
+}
+
+/* Conviction line stays muted but lighter */
+.fl-conviction {
+  color: var(--text-main) !important;
+  opacity: 1;
+}
+
+/* HEPZ name stays accent blue */
+.fl-name { color: var(--accent) !important; }
+
+/* Portfolio link — accent blue, bold */
+.portfolio-link-blue {
+  color: var(--accent) !important;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+  font-weight: 700;
+  transition: opacity 0.3s;
+}
+.portfolio-link-blue:hover { opacity: 0.65; }
+.fl-portfolio { color: var(--text-main) !important; }
+
+/* ── Line-by-line animation — each block wipes in from left ── */
+.fl-block {
+  opacity: 0;
+  transform: translateX(-18px);
+  transition:
+    opacity 0.65s var(--ease),
+    transform 0.65s var(--ease);
+}
+.fl-block.in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* fl-list gets a slight different entrance */
+.fl-list.fl-block {
+  transform: translateX(-12px);
+}
+
+/* fl-name punches in with scale */
+.fl-name.fl-block {
+  transform: translateX(-18px) scale(0.96);
+}
+.fl-name.fl-block.in {
+  transform: translateX(0) scale(1);
+}
+
+
+/* ── Foundation line: standalone Playfair, large, accent ── */
+.fl-foundation {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(18px, 2.4vw, 28px);
+  color: var(--text-main);
+  display: block;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* ── House line: Caveat, jump size, accent blue ── */
+.fl-house-line {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(21px, 2.6vw, 30px);
+  font-weight: 700;
+  color: var(--text-main);
+  display: block;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+/* ── Muted passage: the journey, gray, readable ── */
+.fl-muted-passage {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 600;
+  color: var(--text-main);
+  display: block;
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+/* Muted list items */
+.fl-muted-list .fl-list-item {
+  color: var(--text-main) !important;
+}
+
+/* ── Build paragraph: back to text-main, full strength ── */
+.fl-build {
+  color: var(--text-main) !important;
+}
+
+
+/* ── "Writing has been that for me." — standalone bridge, slightly larger ── */
+.fl-bridge-solo {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(20px, 2.4vw, 27px);
+  font-weight: 700;
+  color: var(--text-main);
+  display: block;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+/* ── "All of it brought me here. Not by accident." — short pivot punch ── */
+.fl-pivot {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 2vw, 23px);
+  font-weight: 700;
+  color: var(--text-main);
+  display: block;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+
+/* ── Conviction block — "Because there is a kind of work..." ──
+   Slightly larger, Playfair italic for emotional weight,
+   the turn of the whole letter lives here ── */
+.fl-conviction {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: clamp(18px, 2.2vw, 25px) !important;
+  color: var(--text-main) !important;
+  display: block;
+  line-height: 1.75;
+  margin-bottom: 24px;
+  opacity: 1 !important;
+}
+
+
+/* ── BLANKET: every letter text element = Caveat + text-main, no exceptions ──
+   HEPZ name stays accent via fl-name specificity. ── */
+.founder-letter-body span,
+.founder-letter-body p,
+.founder-letter-body div,
+.fl-foundation,
+.fl-house-line,
+.fl-bridge-solo,
+.fl-muted-passage,
+.fl-pivot,
+.fl-conviction,
+.fl-build,
+.fl-body,
+.fl-bridge,
+.fl-hook,
+.fl-portfolio,
+.fl-list-item {
+  font-family: 'Caveat', cursive !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  color: var(--text-main) !important;
+  opacity: 1 !important;
+}
+
+/* fl-name is the only exception — Bebas Neue, accent blue */
+.fl-name {
+  font-family: 'Bebas Neue', sans-serif !important;
+  color: var(--accent) !important;
+  font-style: normal !important;
+}
+
+@media (max-width: 768px) {
+  #s03b { padding: 60px 0 90px; }
+  .founder-letter { padding: 52px 28px 44px 28px; }
+  .founder-letter-body { padding-right: 72px; }
+  .founder-pin { top: -48px; right: -12px; }
+  .founder-pin-circle { width: 120px; height: 120px; }
+  .fl-hook { font-size: clamp(16px, 4.5vw, 22px); }
+  .fl-bridge, .fl-body, .fl-build, .fl-list-item, .fl-portfolio {
+    font-size: clamp(15px, 4.2vw, 19px);
+  }
+  .fl-name { font-size: clamp(28px, 8vw, 44px); }
+}
 
 .s { width: 100vw; position: relative; background: transparent; display: flex; flex-direction: column; scroll-snap-align: start; z-index: 1; }
 .s > * { flex-shrink: 0; }
@@ -263,7 +964,7 @@ body.light .theme-icon-sun { display: none; }
 @keyframes roll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ── s02 WHO WE ARE ── */
-#s02 { justify-content: center; align-items: center; text-align: center; }
+#s02 { justify-content: center; align-items: center; text-align: center; background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, var(--bg) 100%); }
 .s02-inner { padding: 100px var(--pad) 80px; display: flex; flex-direction: column; align-items: center; width: 100%; }
 .s02-h { font-size: clamp(72px, 14vw, 180px); display: block; line-height: 0.88; margin-bottom: 16px; }
 .s02-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(24px, 3.5vw, 42px); color: var(--text-main); font-weight: 500; display: block; line-height: 1.3; margin-bottom: 28px; }
@@ -329,61 +1030,56 @@ body.light .theme-icon-sun { display: none; }
 .s03-head { text-align: center; margin-bottom: 40px; }
 .s03-h1 { font-size: clamp(48px, 9.5vw, 116px); display: block; line-height: 1; }
 .s03-h2 { font-size: clamp(36px, 7.5vw, 90px); display: block; font-weight: 500; line-height: 1; font-family: 'Playfair Display', serif; font-style: italic; color: var(--accent); }
-.logo-mwrap { overflow: hidden; position: relative; border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); background: var(--bg); }
-.logo-row { display: flex; width: max-content; align-items: center; padding: 24px 0; }
-.logo-row:first-child { animation: roll-fwd 35s linear infinite; border-bottom: var(--border-w) solid var(--line); }
-.logo-row:last-child { animation: roll-rev 45s linear infinite; }
-.logo-mwrap:hover .logo-row { animation-play-state: paused; }
-@keyframes roll-fwd { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes roll-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.logo-mwrap { position: relative; border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); background: var(--bg); }
+/* No auto-scroll — rows are static, logos wrap naturally */
+.logo-row { display: flex; flex-wrap: wrap; align-items: center; padding: 24px var(--pad); justify-content: center; gap: 12px; }
+.logo-row:first-child { border-bottom: var(--border-w) solid var(--line); }
 
 /* ── LOGO SLOT BASE ── */
 .logo-slot {
   width: 140px; height: 80px; position: relative; overflow: hidden;
-  border-radius: 12px; margin: 0 12px;
+  border-radius: 12px; margin: 0;
   background: var(--bg-card);
   border: var(--border-w) solid var(--line);
   box-shadow: var(--shadow-soft);
-  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s;
-  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .logo-slot:hover {
   transform: translate(-2px, -2px) scale(1.07);
   border-color: var(--accent);
   box-shadow: var(--shadow-brutal);
-  background: var(--bg);
   z-index: 10;
 }
 
-/* ── DARK MODE: invert dark logos → they appear white on black cards ── */
+/* ── DARK MODE: grayscale + invert so dark logos read as white on black ── */
 .logo-slot img {
   width: 100%; height: 100%; object-fit: contain; padding: 12px;
-  filter: grayscale(100%) invert(1) brightness(0.88) contrast(0.9);
+  filter: grayscale(100%) invert(1) brightness(0.78) contrast(1.15);
   transition: filter 0.4s var(--ease), transform 0.4s var(--ease);
-  mix-blend-mode: normal;
 }
-/* On hover → restore full colour (undo invert) */
+/* Hover: brighter but still monochrome white */
 .logo-slot:hover img {
-  filter: grayscale(0%) invert(0) brightness(1) contrast(1);
-  transform: scale(1.1);
+  filter: grayscale(100%) invert(1) brightness(1) contrast(1.1);
+  transform: scale(1.08);
 }
 
-/* ── LIGHT MODE: logos are naturally dark, just desaturate ── */
+/* ── LIGHT MODE: pure grayscale, no invert — dark logos on white ── */
 body.light .logo-slot img {
-  filter: grayscale(100%) invert(0) brightness(0.15) contrast(1.2);
+  filter: grayscale(100%) brightness(0.2) contrast(1.15);
 }
 body.light .logo-slot:hover img {
-  filter: grayscale(0%) invert(0) brightness(1) contrast(1);
+  filter: grayscale(100%) brightness(0.05) contrast(1.4);
+  transform: scale(1.08);
 }
 
-/* Light mode slot background */
+/* Light mode slot */
 body.light .logo-slot {
   background: #ffffff;
-  border-color: rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.09);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 body.light .logo-slot:hover {
-  background: #ffffff;
   border-color: var(--accent);
   box-shadow: var(--shadow-brutal);
 }
@@ -464,15 +1160,15 @@ body.light .logo-slot:hover {
 #s05-sub { font-size: clamp(24px,3.5vw,42px); display: block; font-weight: 600; line-height: 1.3; font-family: 'Playfair Display', serif; font-style: italic; margin-top: 16px; color: var(--accent); }
 
 .stack-wrap { width: 100%; max-width: 1280px; border-radius: 16px; background: var(--bg-card); border: var(--border-w) solid var(--line); box-shadow: var(--shadow-soft); display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden; }
-.stack-card { padding: 48px 36px; display: flex; flex-direction: column; transition: background 0.4s; }
+.stack-card { padding: 48px 36px; display: flex; flex-direction: column; transition: background 0.4s, color 0.4s; }
 .stack-card + .stack-card { border-left: var(--border-w) solid var(--line); }
-.stack-card:hover { background: var(--accent); color: #FFFFFF; }
-.dc-num { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.24em; color: var(--accent); display: block; margin-bottom: 24px; transition: color 0.3s; }
+.stack-card:hover { background: #0A66C2; }
 .stack-card:hover .dc-num { color: #FFFFFF; }
-.dc-title { font-family: 'Playfair Display', serif; font-weight: 600; font-style: italic; font-size: clamp(20px, 1.9vw, 24px); color: var(--text-main); line-height: 1.25; display: block; margin-bottom: 18px; transition: color 0.3s; }
 .stack-card:hover .dc-title { color: #FFFFFF; }
-.dc-desc { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-muted); line-height: 1.8; transition: color 0.3s; }
 .stack-card:hover .dc-desc { color: #FFFFFF; }
+.dc-num { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.24em; color: #0A66C2; display: block; margin-bottom: 24px; }
+.dc-title { font-family: 'Playfair Display', serif; font-weight: 600; font-style: italic; font-size: clamp(20px, 1.9vw, 24px); color: var(--text-main); line-height: 1.25; display: block; margin-bottom: 18px; }
+.dc-desc { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-muted); line-height: 1.8; }
 
 @media (max-width: 1024px) {
   .stack-wrap { grid-template-columns: repeat(2, 1fr); }
@@ -548,7 +1244,7 @@ body.light .logo-slot:hover {
 .rdot.on { opacity: 1; background: var(--accent); transform: scale(1.6); }
 
 /* ── s08 TESTIMONIALS ── */
-#s08 { padding-bottom: 60px; }
+#s08 { padding-bottom: 60px; background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 30%, var(--bg) 100%); }
 .testi-head { padding: 100px var(--pad) 40px; }
 .testi-h1 { font-size: clamp(64px, 11vw, 140px); display: block; line-height: 0.88; color: var(--text-main); }
 .testi-h2 { font-size: clamp(44px, 7.5vw, 96px); display: block; font-weight: 500; line-height: 1.05; color: var(--accent); }
@@ -568,11 +1264,11 @@ body.light .logo-slot:hover {
 .t2rl { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--text-muted); display: block; line-height: 1.4; }
 
 /* ── s09 CONTACT ── */
-#s09 { padding: 100px 0; }
+#s09 { padding: 100px 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 20%, var(--bg) 90%); }
 .s09-inner { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 var(--pad); display: flex; flex-direction: column; gap: 32px; }
 
 .s09-statement { 
-  background: var(--accent); 
+  background: #0A66C2; 
   border: var(--border-w) solid var(--line); 
   border-radius: 24px; 
   padding: clamp(48px, 6vw, 80px) clamp(40px, 6vw, 80px); 
@@ -635,6 +1331,36 @@ body.light .logo-slot:hover {
 
 .footer-copy { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: center; margin-top: 60px; letter-spacing: 0.1em; text-transform: uppercase; }
 
+.footer-verse {
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 28px;
+  opacity: 0.65;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  transition: opacity 0.6s ease;
+}
+.footer-verse:hover { opacity: 0.9; }
+.footer-verse-ref {
+  display: inline;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.35;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.footer-copy {
+  margin-top: 14px;
+}
+
+
 /* Specific Light Mode Heading color requirements */
 body.light #s04-title { color: #0A66C2; }
 body.light #s04-sub { color: #000000; }
@@ -670,22 +1396,6 @@ body.light #s05-sub { color: #0A66C2; }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
 }
 
-/* s03 — logo slot auto colour reveal */
-.logo-slot.auto-active {
-  transform: translate(-2px, -2px) scale(1.07);
-  border-color: var(--accent);
-  box-shadow: var(--shadow-brutal);
-  background: var(--bg);
-  z-index: 10;
-}
-.logo-slot.auto-active img {
-  filter: grayscale(0%) invert(0) brightness(1) contrast(1) !important;
-  transform: scale(1.1);
-}
-body.light .logo-slot.auto-active img {
-  filter: grayscale(0%) invert(0) brightness(1) contrast(1) !important;
-}
-
 /* s04 — active offer card: price bounce + accent border */
 .ocard-stack.auto-active {
   border-color: var(--accent) !important;
@@ -694,16 +1404,6 @@ body.light .logo-slot.auto-active img {
 .ocard-stack.auto-active .ocard-stack-price {
   transform: scale(1.15) rotate(-5deg);
   color: var(--accent);
-}
-
-/* s05 — stack card highlight cycle */
-.stack-card.auto-active {
-  background: var(--accent);
-}
-.stack-card.auto-active .dc-num,
-.stack-card.auto-active .dc-title,
-.stack-card.auto-active .dc-desc {
-  color: #FFFFFF;
 }
 
 /* s07 — badge pulse on active carousel card */
@@ -849,6 +1549,7 @@ body.light .logo-slot.auto-active img {
   }
 </script>
 <div class="noise-bg"></div>
+<div class="grid-bg"></div>
 <header class="top-nav">
   <div class="top-nav-inner">
     <a href="#s01" class="top-nav-logo" data-section="s01">
@@ -979,6 +1680,117 @@ body.light .logo-slot.auto-active img {
         <div class="logo-slot"><img src="image/Open Atlas.png" alt="Open Atlas" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Open Atlas</div></div>
         <div class="logo-slot"><img src="image/TIC.png" alt="TIC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">TIC</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="s" id="s03b">
+
+  <svg class="s03b-sacred" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="300" y1="300" x2="300" y2="20"  stroke="currentColor" stroke-width="0.9"/>
+    <line x1="300" y1="300" x2="300" y2="580" stroke="currentColor" stroke-width="0.9"/>
+    <line x1="300" y1="300" x2="20"  y2="300" stroke="currentColor" stroke-width="0.9"/>
+    <line x1="300" y1="300" x2="580" y2="300" stroke="currentColor" stroke-width="0.9"/>
+    <line x1="300" y1="300" x2="80"  y2="80"  stroke="currentColor" stroke-width="0.55"/>
+    <line x1="300" y1="300" x2="520" y2="80"  stroke="currentColor" stroke-width="0.55"/>
+    <line x1="300" y1="300" x2="80"  y2="520" stroke="currentColor" stroke-width="0.55"/>
+    <line x1="300" y1="300" x2="520" y2="520" stroke="currentColor" stroke-width="0.55"/>
+    <line x1="300" y1="300" x2="160" y2="40"  stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="440" y2="40"  stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="40"  y2="160" stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="560" y2="160" stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="40"  y2="440" stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="560" y2="440" stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="160" y2="560" stroke="currentColor" stroke-width="0.3"/>
+    <line x1="300" y1="300" x2="440" y2="560" stroke="currentColor" stroke-width="0.3"/>
+    <rect x="293" y="72"  width="14" height="376" rx="2" fill="currentColor"/>
+    <rect x="155" y="163" width="290" height="12" rx="2" fill="currentColor"/>
+    <circle cx="300" cy="300" r="75"  stroke="currentColor" stroke-width="0.5" fill="none"/>
+    <circle cx="300" cy="300" r="140" stroke="currentColor" stroke-width="0.38" fill="none"/>
+    <circle cx="300" cy="300" r="215" stroke="currentColor" stroke-width="0.28" fill="none"/>
+  </svg>
+
+  <div class="s03b-inner">
+
+    <div class="s03b-head r d1">
+      <span class="s03b-h1-pf">Meet the</span>
+      <span class="s03b-h2-pf">founder.</span>
+    </div>
+
+    <div class="founder-letter r d2">
+
+      <!-- Cross watermark inside the letter -->
+      <svg class="founder-cross-wm" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="52" y="0" width="16" height="160" rx="3" fill="currentColor"/>
+        <rect x="0" y="44" width="120" height="14" rx="3" fill="currentColor"/>
+      </svg>
+
+      <!-- Circular portrait pinned top-right -->
+      <div class="founder-pin">
+        <div class="founder-pin-heart" aria-hidden="true">💙</div>
+        <div class="founder-pin-circle">
+          <img src="image/founder.jpg"
+               alt="Hephzibah Edwin"
+               onerror="this.style.opacity='0';">
+        </div>
+      </div>
+
+      <div class="founder-letter-body">
+
+        <span class="fl-block fl-house-line" data-delay="0">
+          In every great story, there is a house.
+        </span>
+
+        <span class="fl-block fl-house-line" data-delay="140">
+          A place where something is built. Where craft is learned slowly, practiced with everything you have, and then given away.
+        </span>
+
+        <span class="fl-block fl-bridge-solo" data-delay="260">
+          Writing has been that for me.
+        </span>
+
+        <span class="fl-block fl-muted-passage" data-delay="400">
+          I started as a student with more words than plans. Thirteen years of learning what moves people. Six years of taking that into social media, where attention is the only currency that matters.
+        </span>
+
+        <div class="fl-block fl-list fl-muted-list" data-delay="540">
+          <span class="fl-list-item">Creators went from tens to hundreds of thousands.</span>
+          <span class="fl-list-item">Brands found the audiences that were made for them.</span>
+        </div>
+
+        <span class="fl-block fl-pivot" data-delay="660">
+          All of it brought me here. Not by accident.
+        </span>
+
+        <span class="fl-block fl-conviction" data-delay="780">
+          Because there is a kind of work that chooses you before you choose it. I stopped arguing with mine. And I finally built a house.
+        </span>
+
+        <span class="fl-block fl-build" data-delay="920">
+          From everything I had learned. From every account that grew, every creator who stopped feeling invisible. Built to serve something larger than a business. A house with my name on the door.
+        </span>
+
+        <span class="fl-block fl-name" data-delay="1060">
+          HEPZ Content House.
+        </span>
+
+        <span class="fl-block fl-portfolio" data-delay="1160">
+          If you want to see my work before this chapter, <a href="https://hephzibahe.my.canva.site/portfolio" target="_blank" rel="noopener" class="portfolio-link-blue">my entire portfolio is right here.</a>
+        </span>
+
+      </div>
+
+      <!-- Divider + signature -->
+      <div class="fl-div" id="fl-div"></div>
+      <div class="fl-sig" id="fl-sig">
+        <span class="fl-sig-name">Hephzibah Edwin</span>
+        <span class="fl-sig-role">Founder, HEPZ Content House</span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1193,6 +2005,118 @@ body.light .logo-slot.auto-active img {
   </div>
 </section>
 
+<section class="s" id="s10">
+  <div class="s10-inner">
+    <div class="s10-head r d1">
+      <span class="bb s10-h1">FAQ</span>
+      <span class="s10-h2">The ones everyone's thinking. Answered honestly.</span>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item r d2">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">I've never worked with a content agency before. Where does HCH even start?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">We start before we touch a single piece of content. First, a full audit: your profiles, your positioning, what's working, what isn't, what your audience actually responds to. Then we map where you need to go and exactly how we get there. That document alone, the 90-day roadmap, most clients say it's the clearest picture they've ever had of their own brand. Everything we build comes from that foundation.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d3">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What does "social media management" actually mean day to day?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">On a full management retainer, HCH handles the content calendar, the scripting, the editing, the posting schedule, the comments, the community engagement. The whole thing. You show up where we need you. That might be a weekly call. Maybe recording a video. Everything else runs without you having to think about it. Your brand stays active, consistent, and growing. Whether you're in back-to-back meetings or on a flight.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d4">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">I already post on my own. Why do I need HCH?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">Posting and strategy are two different things. Posting is showing up. Strategy is knowing what to say, to whom, in what format, at what stage of their decision to work with you. Most brands that come to us are already posting. They're just not growing. The content exists. The intent is there. What's missing is the architecture underneath it. The hook framework. The content pillars. The narrative thread that makes someone follow you on a Tuesday and book a call on a Friday.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d5">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How does HCH write in my voice without sounding like a template?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">We don't start with a brief. We start with a conversation. The way you describe your work when you're not thinking about it. The phrases you use. The things you care about that never make it into your captions because they feel too specific or too personal. Those are exactly what we build from. The first batch of scripts will need your input. That's by design. Voice matching sharpens over the first few weeks until the content sounds so much like you that you forget we wrote it.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d6">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Which HCH package is right for where I am right now?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">Never worked with a content agency before? Start with the Pilot Sprint. Three weeks, ₹15K, no retainer. You get the full strategy and five live content assets. You'll know by week two whether this is the right fit. Ready to hand it all over, go with Full Takeover. Have a team but need someone to lead the direction, that's Direction. Scaling across Instagram, LinkedIn, and YouTube at the same time and need a dedicated team, that's the All-In Partnership. Not sure? Just book a call. We'll tell you honestly which one fits, even if it's the smallest one.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d1">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What platforms does HCH actually work across?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">Instagram for reach, community, and visual storytelling. LinkedIn for authority, B2B positioning, and personal brand. YouTube for long-form content that compounds. The kind that's still getting views two years from now. And your website: copy, positioning, conversion. What we don't do is spread thin across every platform just to say we cover them. We go deep on the ones that actually move the needle for your specific brand. Better to own three than barely show up on seven.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d2">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How long before we actually see results?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">Four to six weeks before you feel the shift. Not always in the follower count first. More in how the content lands. The quality of comments. The DMs that say "this is exactly what I needed." The numbers follow around month two or three, and then they compound. The brands on our roster that grew to 200K+ followers didn't get there in a month. They got there because we stayed consistent and strategic for long enough that the platform started pushing their content without being asked.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d3">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do I need to be on camera? I'm not comfortable with video.</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">No. Some of our best-performing accounts never show a face. Carousels, brand graphics, strategic text posts, voiceover reels. They work, and sometimes they outperform face-to-camera content for certain niches. That said, if you're building a personal brand and you're open to being on screen even occasionally, it does accelerate things. We figure out what works for your brand specifically, not what the general advice says. And if video is something you want to build toward, we'll get you there at your pace.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d4">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">We've worked with agencies before and it went nowhere. Why is HCH different?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">Usually it comes down to one of two things. Either the strategy wasn't built around your actual niche. It was a version of what worked for someone else. Or the execution was handed off to someone junior who'd never had a real conversation with you. At HCH, the strategy is built from scratch every time. No templates. The senior eye stays on your account throughout. The Pilot Sprint exists specifically because we know that trust has to be earned back. Three weeks, fully live. You see exactly how we work before you commit to anything long-term.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item r d5">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What actually makes HCH different from every other agency saying the same things?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body"><div class="faq-body-inner">
+          <p class="faq-a">Most agencies sell you a service. HCH takes ownership. The strategy, the scripts, the creative direction, the execution. We treat your brand like it's ours. The accounts that went from zero to 200K+ followers weren't built on templates or handed to a team that doesn't know your name. They were built because we stayed close, stayed strategic, and stayed honest about what was working and what wasn't. That's the difference. And the Pilot Sprint is how you feel it before you believe it.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="s" id="s09">
   <div class="s09-inner">
     <div class="s09-statement r d1">
@@ -1206,9 +2130,9 @@ body.light .logo-slot.auto-active img {
         </a>
         <div class="s09-direct-contact">
           <span class="s09-dc-label">Or reach out directly</span>
-          <a href="/cdn-cgi/l/email-protection#a5cdc0c9c9cae5cdc0d5dfc6cacbd1c0cbd1cdcad0d6c08bc6cac8" class="s09-dc-link">
+          <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6c9e1ecf9f3eae6e7fdece7fde1e6fcfaeca7eae6e4" class="s09-dc-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span class="__cf_email__" data-cfemail="c2aaa7aeaead82aaa7b2b8a1adacb6a7acb6aaadb7b1a7eca1adaf">[email&#160;protected]</span>
+            <span class="__cf_email__" data-cfemail="e189848d8d8ea18984919b828e8f95848f95898e949284cf828e8c">[email&#160;protected]</span>
           </a>
           <a href="tel:+919790429699" class="s09-dc-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1234,11 +2158,16 @@ body.light .logo-slot.auto-active img {
         <span class="s09-scard-arrow">↗</span>
       </a>
     </div>
-    <div class="footer-copy r d3">© 2026 HEPZ Content House</div>
+    <div class="footer-verse r d3">
+      "You are the light of the world — a city on a hill cannot be hidden."
+      <span class="footer-verse-ref">Matt. 5:14</span>
+    </div>
+    <div class="footer-copy r d4">© 2026 HEPZ Content House</div>
+
   </div>
 </section>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const topNav = document.querySelector('.top-nav');
 const navLinks = document.querySelectorAll('.top-nav-link[data-section], .nav-drawer-link[data-section]');
 window.addEventListener('scroll', () => {
@@ -1573,53 +2502,6 @@ function slide(sectionId, dir) {
   })();
 
   // ─────────────────────────────────────────────
-  // s03 — Flash random visible logos to full colour
-  // Uses a different approach: pick a random logo-slot
-  // inside each ticker viewport every N ms.
-  // ─────────────────────────────────────────────
-  (function() {
-    const mwrap = document.querySelector('.logo-mwrap');
-    if (!mwrap) return;
-
-    let timers = [];
-    function getVisibleSlots() {
-      const wrapRect = mwrap.getBoundingClientRect();
-      return [...document.querySelectorAll('.logo-slot')].filter(slot => {
-        const r = slot.getBoundingClientRect();
-        return r.left >= wrapRect.left - 10 && r.right <= wrapRect.right + 10;
-      });
-    }
-
-    function flashRandom() {
-      document.querySelectorAll('.logo-slot.auto-active').forEach(el => el.classList.remove('auto-active'));
-      const visible = getVisibleSlots();
-      if (!visible.length) return;
-      // Pick 2 random slots from visible ones
-      const picks = visible.sort(() => Math.random() - 0.5).slice(0, 2);
-      picks.forEach(slot => slot.classList.add('auto-active'));
-    }
-
-    yieldToHover([...document.querySelectorAll('.logo-slot')]);
-
-    let running = false;
-    function start() {
-      if (running) return; running = true;
-      flashRandom();
-      timers.push(setInterval(flashRandom, 900));
-    }
-    function stop() {
-      running = false;
-      timers.forEach(clearInterval); timers = [];
-      document.querySelectorAll('.logo-slot.auto-active').forEach(el => el.classList.remove('auto-active'));
-    }
-
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => e.isIntersecting ? start() : stop());
-    }, { threshold: 0.1 });
-    io.observe(mwrap);
-  })();
-
-  // ─────────────────────────────────────────────
   // s04 — Highlight whichever offer card is the
   // current "top" sticky card (the frontmost one).
   // Piggybacks on the existing scroll stack logic.
@@ -1669,17 +2551,6 @@ function slide(sectionId, dir) {
       if (s04Active) updateActiveCard();
     }, { passive: true });
     updateActiveCard();
-  })();
-
-  // ─────────────────────────────────────────────
-  // s05 — Cycle through the 4 execution stack cards
-  // ─────────────────────────────────────────────
-  (function() {
-    const cards = [...document.querySelectorAll('.stack-card')];
-    if (!cards.length) return;
-    yieldToHover(cards);
-    const cycler = makeCycler(() => cards, 1600);
-    watchSection('s05', cycler, 0.3);
   })();
 
   // ─────────────────────────────────────────────
@@ -1781,6 +2652,99 @@ function slide(sectionId, dir) {
     watchSection('s09', cycler, 0.3);
   })();
 
+})();
+
+
+// ── FAQ accordion ──
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  // Open clicked if it was closed
+  if (!isOpen) item.classList.add('open');
+}
+
+
+
+
+
+
+
+// ── Meet the Founder — staggered block animation ──
+(function() {
+  const letter = document.querySelector('.founder-letter');
+  if (!letter) return;
+
+  const blocks = [...letter.querySelectorAll('.fl-block')];
+  const div    = document.getElementById('fl-div');
+  const sig    = document.getElementById('fl-sig');
+
+  let fired = false;
+
+  function animate() {
+    if (fired) return;
+    fired = true;
+
+    blocks.forEach(block => {
+      const delay = parseInt(block.dataset.delay || '0');
+      setTimeout(() => block.classList.add('in'), delay);
+    });
+
+    const last = Math.max(...blocks.map(b => parseInt(b.dataset.delay || '0')));
+    if (div) setTimeout(() => div.classList.add('in'), last + 200);
+    if (sig) setTimeout(() => sig.classList.add('in'), last + 380);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) animate(); });
+  }, { threshold: 0.18 });
+  io.observe(letter);
+})();
+
+// ── Vesica Piscis sacred geometry background ──
+(function() {
+  const isDark = () => !document.body.classList.contains('light');
+  const R = 30; // circle radius
+  // Horizontal step = R (circles overlap by half their diameter)
+  // Vertical step = R * sqrt(3) ≈ R * 0.866 * 2 — but we use R*1.0 for denser vesica
+  const stepX = R;
+  const stepY = R * 1.732; // √3 × R — one full row height
+
+  function buildSVG() {
+    const dark = isDark();
+    const stroke = dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.07)';
+    // Pattern tile: 2*stepX wide, stepY tall — contains 2 offset rows
+    const pw = stepX * 2;
+    const ph = stepY;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <defs>
+        <pattern id="vp" x="0" y="0" width="${pw}" height="${ph}" patternUnits="userSpaceOnUse">
+          <circle cx="0"        cy="0"        r="${R}" fill="none" stroke="${stroke}" stroke-width="0.6"/>
+          <circle cx="${pw}"    cy="0"        r="${R}" fill="none" stroke="${stroke}" stroke-width="0.6"/>
+          <circle cx="0"        cy="${ph}"    r="${R}" fill="none" stroke="${stroke}" stroke-width="0.6"/>
+          <circle cx="${pw}"    cy="${ph}"    r="${R}" fill="none" stroke="${stroke}" stroke-width="0.6"/>
+          <circle cx="${stepX}" cy="${ph/2}"  r="${R}" fill="none" stroke="${stroke}" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#vp)"/>
+    </svg>`;
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+
+  function apply() {
+    const el = document.querySelector('.grid-bg');
+    if (!el) return;
+    el.style.backgroundImage = 'url("' + buildSVG() + '")';
+    el.style.backgroundSize = 'auto';
+    el.style.backgroundRepeat = 'repeat';
+  }
+
+  apply();
+
+  // Re-apply when theme toggles so stroke colour updates
+  const themeObserver = new MutationObserver(apply);
+  themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 })();
 
 const themeBtn = document.getElementById('theme-toggle');
