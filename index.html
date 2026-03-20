@@ -216,7 +216,7 @@ body.light .theme-icon-sun { display: none; }
   position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; padding: 18px 0 20px;
   background: var(--bg-nav); border-top: var(--border-w) solid var(--line); backdrop-filter: blur(20px); z-index: 2;
 }
-.s01-ticker-row { display: flex; width: max-content; animation: roll 50s linear infinite; align-items: center; gap: 12px; }
+.s01-ticker-row { display: flex; width: max-content; animation: roll 22s linear infinite; align-items: center; gap: 12px; }
 .s01-ticker-item {
   font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.02em;
   color: var(--text-main); white-space: nowrap; display: inline-flex; align-items: center; gap: 8px;
@@ -295,8 +295,8 @@ body.light .theme-icon-sun { display: none; }
 .s03-h2 { font-size: clamp(36px, 7.5vw, 90px); display: block; font-weight: 500; line-height: 1; font-family: 'Playfair Display', serif; font-style: italic; color: var(--accent); }
 .logo-mwrap { overflow: hidden; position: relative; border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); background: var(--bg); }
 .logo-row { display: flex; width: max-content; align-items: center; padding: 24px 0; }
-.logo-row:first-child { animation: roll-fwd 90s linear infinite; border-bottom: var(--border-w) solid var(--line); }
-.logo-row:last-child { animation: roll-rev 110s linear infinite; }
+.logo-row:first-child { animation: roll-fwd 35s linear infinite; border-bottom: var(--border-w) solid var(--line); }
+.logo-row:last-child { animation: roll-rev 45s linear infinite; }
 .logo-mwrap:hover .logo-row { animation-play-state: paused; }
 @keyframes roll-fwd { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes roll-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
@@ -334,6 +334,9 @@ body.light .theme-icon-sun { display: none; }
 .ocard-stack:nth-child(2) { top: 136px; z-index: 11; }
 .ocard-stack:nth-child(3) { top: 152px; z-index: 12; }
 .ocard-stack:nth-child(4) { top: 168px; z-index: 13; }
+
+/* Scale transition is driven by JS — smooth feel */
+.ocard-stack { will-change: transform; }
 
 .ocard-stack-top { display: flex; flex-direction: column; gap: 24px; }
 @media (min-width: 768px) { .ocard-stack-top { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 48px; } }
@@ -412,7 +415,7 @@ body.light .theme-icon-sun { display: none; }
 
 .rcard { flex-shrink: 0; position: relative; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s; background: var(--bg-card); display: block; text-decoration: none; }
 .rcard.portrait { height: clamp(400px, 55svh, 600px); aspect-ratio: 9 / 16; border-radius: 24px; border: var(--border-w) solid var(--line); box-shadow: var(--shadow-soft); overflow: hidden; }
-.rcard.dashboard { height: clamp(260px, 35svh, 380px); aspect-ratio: 4 / 3; border-radius: 20px; border: var(--border-w) solid var(--line); box-shadow: var(--shadow-soft); overflow: hidden; }
+.rcard.dashboard { height: clamp(380px, 52svh, 560px); aspect-ratio: 3 / 2; border-radius: 20px; border: var(--border-w) solid var(--line); box-shadow: var(--shadow-soft); overflow: hidden; }
 .rcard:hover { transform: translate(-4px, -4px) scale(1.02); border-color: var(--accent); box-shadow: var(--shadow-brutal); z-index: 10; }
 
 .mock-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40%; height: 24px; background: var(--bg); border-bottom: var(--border-w) solid var(--line); border-left: var(--border-w) solid var(--line); border-right: var(--border-w) solid var(--line); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 6; }
@@ -470,7 +473,7 @@ body.light .theme-icon-sun { display: none; }
 .testi-h1 { font-size: clamp(64px, 11vw, 140px); display: block; line-height: 0.88; color: var(--text-main); }
 .testi-h2 { font-size: clamp(44px, 7.5vw, 96px); display: block; font-weight: 500; line-height: 1.05; color: var(--accent); }
 .testi-mwrap { overflow: hidden; padding: 20px 0; position: relative; width: 100%; }
-.testi-mrow { display: flex; width: max-content; animation: roll 65s linear infinite; gap: 32px; padding: 0 16px; }
+.testi-mrow { display: flex; width: max-content; animation: roll 28s linear infinite; gap: 32px; padding: 0 16px; }
 .testi-mrow.rev { animation-direction: reverse; animation-duration: 80s; }
 .testi-mrow:hover { animation-play-state: paused; }
 .testi-card { background: var(--bg-card); border: var(--border-w) solid var(--line); border-radius: 16px; padding: 36px 40px; width: 440px; display: flex; flex-direction: column; gap: 20px; box-shadow: var(--shadow-soft); transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s; }
@@ -672,7 +675,7 @@ body.light #s05-sub { color: #0A66C2; }
         <div class="logo-slot"><img src="images/Manifest.png" alt="Manifest" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Manifest</div></div>
         <div class="logo-slot"><img src="images/Moj.png" alt="Moj" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Moj</div></div>
         <div class="logo-slot"><img src="images/MPower Financing.png" alt="MPOWER Financing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">MPOWER</div></div>
-        <div class="logo-slot"><img src="images/Next wave.png" alt="NXT Wave" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">NXT Wave</div></div>
+        <div class="logo-slot"><img src="images/Next Wave.png" alt="NXT Wave" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">NXT Wave</div></div>
         <div class="logo-slot"><img src="images/Plaud.png" alt="Plaud" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Plaud</div></div>
         <div class="logo-slot"><img src="images/Purdue University.png" alt="Purdue University" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Purdue</div></div>
       </div>
@@ -914,7 +917,7 @@ body.light #s05-sub { color: #0A66C2; }
       <div class="res-track" id="track-s07">
         <div class="rcard dashboard"><div class="rcard-img"><img src="images/D4.png" alt="862K interactions" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">862K</span><span class="rcard-unit">interactions</span></div></div>
         <div class="rcard dashboard"><div class="rcard-img"><img src="images/M1.png" alt="229K followers" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">229K</span><span class="rcard-unit">followers</span></div></div>
-        <div class="rcard dashboard"><div class="rcard-img"><img src="images/m2 .png" alt="134K growth" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">134K</span><span class="rcard-unit">growth</span></div></div>
+        <div class="rcard dashboard"><div class="rcard-img"><img src="images/m2.png" alt="134K growth" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">134K</span><span class="rcard-unit">growth</span></div></div>
         <div class="rcard dashboard"><div class="rcard-img"><img src="images/N2.png" alt="20.7M reach" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">20.7M</span><span class="rcard-unit">reach</span></div></div>
         <div class="rcard dashboard"><div class="rcard-img"><img src="images/D1.png" alt="16.3M plays" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">16.3M</span><span class="rcard-unit">plays</span></div></div>
         <div class="rcard dashboard"><div class="rcard-img"><img src="images/N1.png" alt="10M impressions" onerror="this.style.display='none';"></div><div class="rcard-badge"><svg class="badge-thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="rcard-stat">10M</span><span class="rcard-unit">impressions</span></div></div>
@@ -986,9 +989,9 @@ body.light #s05-sub { color: #0A66C2; }
         </a>
         <div class="s09-direct-contact">
           <span class="s09-dc-label">Or reach out directly</span>
-          <a href="mailto:hello@hepzcontenthouse.com" class="s09-dc-link">
+          <a href="/cdn-cgi/l/email-protection#1e767b7272715e767b6e647d71706a7b706a76716b6d7b307d7173" class="s09-dc-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            hello@hepzcontenthouse.com
+            <span class="__cf_email__" data-cfemail="19717c75757659717c69637a76776d7c776d71766c6a7c377a7674">[email&#160;protected]</span>
           </a>
           <a href="tel:+919790429699" class="s09-dc-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1018,7 +1021,7 @@ body.light #s05-sub { color: #0A66C2; }
   </div>
 </section>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const topNav = document.querySelector('.top-nav');
 const navLinks = document.querySelectorAll('.top-nav-link[data-section], .nav-drawer-link[data-section]');
 window.addEventListener('scroll', () => {
@@ -1163,6 +1166,59 @@ function slide(sectionId, dir) {
 
 ['s06','s07'].forEach(id => initCarousel(id));
 
+// ── STACKING CARDS SCROLL ANIMATION ──
+(function() {
+  const stackWrap = document.querySelector('.s04-stack-wrap');
+  const cards = [...document.querySelectorAll('.ocard-stack')];
+  if (!stackWrap || cards.length === 0) return;
+
+  const SCALE_PER_CARD = 0.04; // how much each buried card shrinks
+  const BLUR_PER_CARD  = 1.5;  // px blur per layer buried
+
+  function updateStack() {
+    const wrapTop = stackWrap.getBoundingClientRect().top;
+    const scrollY = window.scrollY;
+    const navH = 120; // matches first card's top offset
+
+    cards.forEach((card, i) => {
+      const cardTop = card.getBoundingClientRect().top;
+
+      // How far has this card scrolled past its sticky point?
+      // progress 0 = just stuck, 1 = next card fully on top
+      const cardStickyTop = parseInt(getComputedStyle(card).top) || navH;
+      const distPastSticky = navH + cardStickyTop - cardTop; // positive when stuck
+
+      // Count how many cards are currently "on top of" this one
+      let layersAbove = 0;
+      cards.forEach((other, j) => {
+        if (j <= i) return;
+        const otherTop = other.getBoundingClientRect().top;
+        const otherStickyTop = parseInt(getComputedStyle(other).top) || navH;
+        // other card has reached its sticky position
+        if (otherTop <= otherStickyTop + 2) layersAbove++;
+      });
+
+      if (layersAbove > 0) {
+        const scale = Math.max(0.82, 1 - layersAbove * SCALE_PER_CARD);
+        const blur  = Math.min(layersAbove * BLUR_PER_CARD, 6);
+        card.style.transform = `scale(${scale})`;
+        card.style.filter    = `blur(${blur}px)`;
+        card.style.opacity   = Math.max(0.55, 1 - layersAbove * 0.12);
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease, opacity 0.5s ease';
+      } else {
+        card.style.transform = '';
+        card.style.filter    = '';
+        card.style.opacity   = '';
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease, opacity 0.5s ease';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateStack, { passive: true });
+  window.addEventListener('resize', updateStack, { passive: true });
+  updateStack();
+})();
+
 const themeBtn = document.getElementById('theme-toggle');
 const toggleLabel = document.getElementById('toggle-label');
 function updateToggleLabel() {
@@ -1174,7 +1230,8 @@ updateToggleLabel();
 if (themeBtn) {
   themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('light');
-    localStorage.setItem('hepz-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    const isLight = document.body.classList.contains('light');
+    localStorage.setItem('hepz-theme', isLight ? 'light' : 'dark');
     updateToggleLabel();
   });
 }
