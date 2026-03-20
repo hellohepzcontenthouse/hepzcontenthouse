@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='14' y='4' width='4' height='24' fill='%233B9EFF'/%3E%3Crect x='6' y='10' width='20' height='4' fill='%233B9EFF'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%23000'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='32' fill='%23FFF' letter-spacing='1'%3EHEPZ%3C/text%3E%3Crect x='25' y='70' width='50' height='3' fill='%233B9EFF'/%3E%3C/svg%3E">
 <meta name="inspiration" content="Isaiah 62:4 — You will be called Hephzibah, for the Lord will take delight in you.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,10 +29,10 @@
 
 <!-- Canonical -->
 <link rel="canonical" href="https://hepzcontenthouse.com">
-<title>† HEPZ Content House</title>
+<title>HEPZ Content House</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════
    PREMIUM NEO-BRUTALIST DESIGN SYSTEM (Black / White / LinkedIn Blue)
@@ -139,14 +139,7 @@ a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-
 body.light .noise-bg { mix-blend-mode: multiply; opacity: 0.08; }
 
 
-/* ── SUBTLE BACKGROUND GRID ──
-   A fixed full-page grid overlay that sits behind all content.
-   Very low opacity — purely textural, never distracting.
-   Adapts colour for dark/light mode via CSS vars.
-   ─────────────────────────────────────────────────────── */
-/* Vesica Piscis — sacred geometry, source of the ichthys fish.
-   Overlapping circles tiled across the full page.
-   The SVG pattern is injected into .grid-bg via JS on load. */
+/* ── SUBTLE BACKGROUND GRID ── */
 .grid-bg {
   position: fixed; inset: 0; pointer-events: none; z-index: 0;
   opacity: 1;
@@ -308,7 +301,7 @@ body.light .s03b-sacred { opacity: 0.052; }
   font-style: italic; font-weight: 500;
   font-size: clamp(20px, 2.8vw, 32px);
   color: var(--accent);
-  display: block; margin-top: 10px; line-height: 1.3;
+  display: block margin-top: 10px; line-height: 1.3;
 }
 
 /* ── The letter paper ── */
@@ -431,115 +424,210 @@ body.light .founder-pin-circle {
   padding-right: 100px;
 }
 
-/* ── Line-by-line animation blocks ── */
-.fl-block {
+
+/* ── GUIDED READING HIGHLIGHTS (Scroll activated) ── */
+.founder-letter-body .fl-block {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.fl-block.in { opacity: 1; transform: translateY(0); }
-
-/* Opening hook — large, italic, Playfair */
-.fl-hook {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(18px, 2.2vw, 26px);
+  transform: translateX(-18px);
+  /* The color transitions smoothly so it doesn't feel chunky */
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), color 0.6s var(--ease) !important;
   color: var(--text-main);
-  line-height: 1.65;
-  display: block;
-  margin-bottom: 32px;
 }
-.fl-hook::first-line {
-  font-size: 1.08em;
+.founder-letter-body .fl-block.in {
+  opacity: 0.25; /* Dimmed unread state */
+  transform: translateX(0);
+}
+.founder-letter-body .fl-block.in.reading-focus {
+  opacity: 1;
+  color: var(--text-main);
+  transform: translateX(6px); /* Very gentle reading nudge */
+}
+.founder-letter-body .fl-block.in.reading-past {
+  opacity: 1;
+  color: var(--text-main);
+  transform: translateX(0);
+}
+/* Ensure smooth color inheritance for all nested block elements */
+.founder-letter-body .fl-block *,
+.founder-letter-body .fl-list-item {
+  transition: color 0.6s var(--ease);
+  color: inherit;
 }
 
-/* Bridge — Caveat, warm, personal */
-.fl-bridge {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(19px, 2.1vw, 25px);
-  font-weight: 600;
-  color: var(--text-main);
-  line-height: 1.75;
+/* ── BLANKET: Handwritten styling base ── */
+.founder-letter-body span:not(.fl-name-p1):not(.fl-name-p2):not(.portfolio-link-blue),
+.founder-letter-body p,
+.founder-letter-body div:not(.fl-list):not(.fl-name):not(.fl-name-rule):not(.founder-pin):not(.founder-pin-circle):not(.founder-pin-heart),
+.fl-foundation,
+.fl-house-line,
+.fl-bridge-solo,
+.fl-muted-passage,
+.fl-pivot,
+.fl-conviction,
+.fl-build,
+.fl-body,
+.fl-bridge,
+.fl-hook,
+.fl-portfolio,
+.fl-list-item {
+  font-family: 'Kalam', cursive !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em;
+}
+
+/* Block specifics (Adjusted for Kalam proportions) */
+.fl-house-line {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700 !important;
   display: block;
+  line-height: 1.5;
   margin-bottom: 28px;
 }
-
-/* Body paragraph — slightly smaller Caveat */
-.fl-body {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(17px, 1.9vw, 22px);
-  font-weight: 600;
-  color: var(--text-main);
-  line-height: 1.85;
+.fl-bridge-solo {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 700 !important;
   display: block;
+  line-height: 1.5;
   margin-bottom: 24px;
 }
-
-/* Short punchy lines — displayed as a visual list, slight indent */
+.fl-muted-passage {
+  font-size: clamp(18px, 2vw, 22px);
+  display: block;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+.fl-pivot {
+  font-size: clamp(19px, 2.1vw, 24px);
+  font-weight: 700 !important;
+  display: block;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
 .fl-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   margin-bottom: 28px;
   padding-left: 20px;
   border-left: 2px solid var(--accent);
 }
 .fl-list-item {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(17px, 1.9vw, 22px);
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.6;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.5;
 }
-
-/* Conviction line — italicised, muted accent feel */
 .fl-conviction {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(16px, 1.8vw, 21px);
-  color: var(--text-main);
-  line-height: 1.7;
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  font-size: clamp(20px, 2.2vw, 24px) !important;
   display: block;
-  margin-bottom: 28px;
+  line-height: 1.6;
+  margin-bottom: 24px;
 }
-
-/* The house build paragraph */
 .fl-build {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(17px, 1.9vw, 22px);
-  font-weight: 600;
-  color: var(--text-main);
-  line-height: 1.85;
+  font-size: clamp(18px, 2vw, 22px);
   display: block;
+  line-height: 1.65;
   margin-bottom: 28px;
 }
 
-/* HEPZ name — Bebas Neue, big, accent, its own breathing room */
+/* ── LOGO FONT MATCH for "HEPZ Content House." ── */
 .fl-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(32px, 5vw, 56px);
-  letter-spacing: 0.05em;
-  color: var(--accent);
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 36px 0 32px 0;
+}
+.fl-name-p1 {
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 600 !important;
+  font-size: clamp(32px, 6vw, 44px) !important;
+  letter-spacing: 0.26em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  color: inherit; /* will take color from Guided Reading focus/past */
+}
+.fl-name-rule {
   display: block;
-  line-height: 1;
-  margin-bottom: 28px;
+  width: 100%;
+  max-width: 160px;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+.fl-name-p2 {
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 500 !important;
+  font-style: italic !important;
+  font-size: clamp(16px, 3vw, 22px) !important;
+  letter-spacing: 0.20em !important;
+  text-transform: lowercase !important;
+  color: var(--accent) !important; /* Lock to accent blue always to match logo */
+  line-height: 1 !important;
+}
+
+/* ── SKIP BUTTON ── */
+.fl-skip-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 6px 16px 6px 6px;
+  background: var(--bg);
+  border: var(--border-w) solid var(--line);
+  border-radius: 100px;
+  box-shadow: var(--shadow-soft);
+}
+.fl-skip-btn {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--bg) !important;
+  background: var(--text-main) !important;
+  border: none !important;
+  border-radius: 100px;
+  padding: 8px 16px;
+  cursor: none;
+  transition: background 0.3s, transform 0.3s !important;
+}
+.fl-skip-btn:hover {
+  background: var(--accent) !important;
+  transform: scale(1.05);
+}
+.fl-skip-msg {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0 !important;
+}
+@media (max-width: 640px) {
+  .fl-skip-wrap { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    border: none; 
+    background: transparent; 
+    padding: 0; 
+    box-shadow: none; 
+    gap: 12px; 
+  }
+  .fl-skip-btn { border: var(--border-w) solid var(--text-main) !important; }
 }
 
 /* Portfolio line */
 .fl-portfolio {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(15px, 1.7vw, 19px);
-  font-weight: 600;
-  color: var(--text-main);
+  font-size: clamp(17px, 1.8vw, 20px);
   display: block;
   margin-bottom: 0;
 }
-.fl-portfolio a {
-  color: var(--accent);
+.fl-portfolio a.portfolio-link-blue {
+  color: var(--accent) !important;
   text-decoration: none;
-  border-bottom: 1.5px solid currentColor;
+  border-bottom: 1.5px solid var(--accent);
   padding-bottom: 1px;
   font-weight: 700;
   transition: opacity 0.3s;
@@ -584,7 +672,6 @@ body.light .founder-pin-circle {
   margin-top: 5px;
 }
 
-
 /* ── Playfair-only heading for s03b ── */
 .s03b-h1-pf {
   font-family: 'Playfair Display', serif;
@@ -626,179 +713,6 @@ body.light .founder-pin-circle {
   100% { transform: rotate(0deg) scale(1); }
 }
 
-/* ── All letter body text in text-main, no gray ── */
-.fl-body,
-.fl-bridge,
-.fl-build,
-.fl-list-item,
-.fl-hook,
-.fl-portfolio {
-  color: var(--text-main) !important;
-}
-
-/* Conviction line stays muted but lighter */
-.fl-conviction {
-  color: var(--text-main) !important;
-  opacity: 1;
-}
-
-/* HEPZ name stays accent blue */
-.fl-name { color: var(--accent) !important; }
-
-/* Portfolio link — accent blue, bold */
-.portfolio-link-blue {
-  color: var(--accent) !important;
-  text-decoration: none;
-  border-bottom: 1.5px solid var(--accent);
-  padding-bottom: 1px;
-  font-weight: 700;
-  transition: opacity 0.3s;
-}
-.portfolio-link-blue:hover { opacity: 0.65; }
-.fl-portfolio { color: var(--text-main) !important; }
-
-/* ── Line-by-line animation — each block wipes in from left ── */
-.fl-block {
-  opacity: 0;
-  transform: translateX(-18px);
-  transition:
-    opacity 0.65s var(--ease),
-    transform 0.65s var(--ease);
-}
-.fl-block.in {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* fl-list gets a slight different entrance */
-.fl-list.fl-block {
-  transform: translateX(-12px);
-}
-
-/* fl-name punches in with scale */
-.fl-name.fl-block {
-  transform: translateX(-18px) scale(0.96);
-}
-.fl-name.fl-block.in {
-  transform: translateX(0) scale(1);
-}
-
-
-/* ── Foundation line: standalone Playfair, large, accent ── */
-.fl-foundation {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(18px, 2.4vw, 28px);
-  color: var(--text-main);
-  display: block;
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-/* ── House line: Caveat, jump size, accent blue ── */
-.fl-house-line {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(21px, 2.6vw, 30px);
-  font-weight: 700;
-  color: var(--text-main);
-  display: block;
-  line-height: 1.65;
-  margin-bottom: 32px;
-}
-
-/* ── Muted passage: the journey, gray, readable ── */
-.fl-muted-passage {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(17px, 1.9vw, 22px);
-  font-weight: 600;
-  color: var(--text-main);
-  display: block;
-  line-height: 1.85;
-  margin-bottom: 20px;
-}
-
-/* Muted list items */
-.fl-muted-list .fl-list-item {
-  color: var(--text-main) !important;
-}
-
-/* ── Build paragraph: back to text-main, full strength ── */
-.fl-build {
-  color: var(--text-main) !important;
-}
-
-
-/* ── "Writing has been that for me." — standalone bridge, slightly larger ── */
-.fl-bridge-solo {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(20px, 2.4vw, 27px);
-  font-weight: 700;
-  color: var(--text-main);
-  display: block;
-  line-height: 1.5;
-  margin-bottom: 24px;
-  font-style: italic;
-}
-
-/* ── "All of it brought me here. Not by accident." — short pivot punch ── */
-.fl-pivot {
-  font-family: 'Caveat', cursive;
-  font-size: clamp(18px, 2vw, 23px);
-  font-weight: 700;
-  color: var(--text-main);
-  display: block;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  letter-spacing: 0.01em;
-}
-
-/* ── Conviction block — "Because there is a kind of work..." ──
-   Slightly larger, Playfair italic for emotional weight,
-   the turn of the whole letter lives here ── */
-.fl-conviction {
-  font-family: 'Playfair Display', serif !important;
-  font-style: italic !important;
-  font-weight: 400 !important;
-  font-size: clamp(18px, 2.2vw, 25px) !important;
-  color: var(--text-main) !important;
-  display: block;
-  line-height: 1.75;
-  margin-bottom: 24px;
-  opacity: 1 !important;
-}
-
-
-/* ── BLANKET: every letter text element = Caveat + text-main, no exceptions ──
-   HEPZ name stays accent via fl-name specificity. ── */
-.founder-letter-body span,
-.founder-letter-body p,
-.founder-letter-body div,
-.fl-foundation,
-.fl-house-line,
-.fl-bridge-solo,
-.fl-muted-passage,
-.fl-pivot,
-.fl-conviction,
-.fl-build,
-.fl-body,
-.fl-bridge,
-.fl-hook,
-.fl-portfolio,
-.fl-list-item {
-  font-family: 'Caveat', cursive !important;
-  font-style: normal !important;
-  font-weight: 600 !important;
-  color: var(--text-main) !important;
-  opacity: 1 !important;
-}
-
-/* fl-name is the only exception — Bebas Neue, accent blue */
-.fl-name {
-  font-family: 'Bebas Neue', sans-serif !important;
-  color: var(--accent) !important;
-  font-style: normal !important;
-}
 
 @media (max-width: 768px) {
   #s03b { padding: 60px 0 90px; }
@@ -806,11 +720,9 @@ body.light .founder-pin-circle {
   .founder-letter-body { padding-right: 72px; }
   .founder-pin { top: -48px; right: -12px; }
   .founder-pin-circle { width: 120px; height: 120px; }
-  .fl-hook { font-size: clamp(16px, 4.5vw, 22px); }
   .fl-bridge, .fl-body, .fl-build, .fl-list-item, .fl-portfolio {
     font-size: clamp(15px, 4.2vw, 19px);
   }
-  .fl-name { font-size: clamp(28px, 8vw, 44px); }
 }
 
 .s { width: 100vw; position: relative; background: transparent; display: flex; flex-direction: column; scroll-snap-align: start; z-index: 1; }
@@ -1030,10 +942,12 @@ body.light .theme-icon-sun { display: none; }
 .s03-head { text-align: center; margin-bottom: 40px; }
 .s03-h1 { font-size: clamp(48px, 9.5vw, 116px); display: block; line-height: 1; }
 .s03-h2 { font-size: clamp(36px, 7.5vw, 90px); display: block; font-weight: 500; line-height: 1; font-family: 'Playfair Display', serif; font-style: italic; color: var(--accent); }
-.logo-mwrap { position: relative; border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); background: var(--bg); }
-/* No auto-scroll — rows are static, logos wrap naturally */
-.logo-row { display: flex; flex-wrap: wrap; align-items: center; padding: 24px var(--pad); justify-content: center; gap: 12px; }
-.logo-row:first-child { border-bottom: var(--border-w) solid var(--line); }
+
+/* Updated continuous scrolling logo row */
+.logo-mwrap { position: relative; border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); background: var(--bg); padding: 24px 0; overflow: hidden; display: flex; flex-direction: column; gap: 16px; }
+.logo-row { display: flex; flex-wrap: nowrap; width: max-content; animation: roll 35s linear infinite; align-items: center; gap: 12px; padding: 0 16px; }
+.logo-row.rev { animation-direction: reverse; animation-duration: 45s; }
+.logo-row:hover { animation-play-state: paused; }
 
 /* ── LOGO SLOT BASE ── */
 .logo-slot {
@@ -1052,28 +966,18 @@ body.light .theme-icon-sun { display: none; }
   z-index: 10;
 }
 
-/* ── DARK MODE: grayscale + invert so dark logos read as white on black ── */
+/* ── LOGOS: Grayscale by default, color on hover (Both Modes) ── */
 .logo-slot img {
   width: 100%; height: 100%; object-fit: contain; padding: 12px;
-  filter: grayscale(100%) invert(1) brightness(0.78) contrast(1.15);
-  transition: filter 0.4s var(--ease), transform 0.4s var(--ease);
+  filter: grayscale(100%) opacity(0.6);
+  transition: filter 0.4s var(--ease), opacity 0.4s var(--ease), transform 0.4s var(--ease);
 }
-/* Hover: brighter but still monochrome white */
 .logo-slot:hover img {
-  filter: grayscale(100%) invert(1) brightness(1) contrast(1.1);
+  filter: grayscale(0%) opacity(1);
   transform: scale(1.08);
 }
 
-/* ── LIGHT MODE: pure grayscale, no invert — dark logos on white ── */
-body.light .logo-slot img {
-  filter: grayscale(100%) brightness(0.2) contrast(1.15);
-}
-body.light .logo-slot:hover img {
-  filter: grayscale(100%) brightness(0.05) contrast(1.4);
-  transform: scale(1.08);
-}
-
-/* Light mode slot */
+/* Light mode slot (keep background/border adjustments) */
 body.light .logo-slot {
   background: #ffffff;
   border-color: rgba(0,0,0,0.09);
@@ -1086,7 +990,7 @@ body.light .logo-slot:hover {
 
 .logo-slot-ph { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-main); }
 .logo-slot:hover .logo-slot-ph { color: var(--accent); }
-@media (max-width: 640px) { .logo-slot { width: 110px; height: 60px; margin: 0 8px; } }
+@media (max-width: 640px) { .logo-slot { width: 110px; height: 60px; gap: 8px; } }
 
 /* ── s04 SERVICES (Three Ways In) ── */
 #s04 { padding-top: 100px; padding-bottom: 15vh; }
@@ -1477,7 +1381,7 @@ body.light #s05-sub { color: #0A66C2; }
   .s02-pitch { font-size: clamp(16px, 4vw, 22px); }
   .s03-head { padding: 0 var(--pad); }
   .s03-h1 { font-size: clamp(40px, 11vw, 70px); }
-  .logo-slot { width: 100px; height: 58px; margin: 0 8px; }
+  .logo-slot { width: 100px; height: 58px; gap: 8px; margin: 0; }
   #s04 { padding-top: 70px; padding-bottom: 8vh; }
   .s04-header { padding: 0 var(--pad); margin-bottom: 40px; }
   #s04-title { font-size: clamp(40px, 11vw, 70px); }
@@ -1563,6 +1467,7 @@ body.light #s05-sub { color: #0A66C2; }
         <a href="#s04" class="top-nav-link" data-section="s04">Offerings</a>
         <a href="#s07" class="top-nav-link" data-section="s07">Impact</a>
         <a href="#s08" class="top-nav-link" data-section="s08">Testimonials</a>
+        <a href="#s10" class="top-nav-link" data-section="s10">FAQ</a>
       </div>
       <a href="https://calendly.com/hello-hepzcontenthouse/30min" target="_blank" rel="noopener" class="top-nav-btn">
         <span>Book a call with us</span>
@@ -1592,6 +1497,7 @@ body.light #s05-sub { color: #0A66C2; }
     <a href="#s04" class="nav-drawer-link" data-section="s04">Offerings</a>
     <a href="#s07" class="nav-drawer-link" data-section="s07">Impact</a>
     <a href="#s08" class="nav-drawer-link" data-section="s08">Testimonials</a>
+    <a href="#s10" class="nav-drawer-link" data-section="s10">FAQ</a>
   </div>
   <div class="nav-drawer-bottom">
     <a href="https://calendly.com/hello-hepzcontenthouse/30min" target="_blank" rel="noopener" class="nav-drawer-cta">Book a call with us</a>
@@ -1661,7 +1567,7 @@ body.light #s05-sub { color: #0A66C2; }
         <div class="logo-slot"><img src="image/Plaud.png" alt="Plaud" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Plaud</div></div>
         <div class="logo-slot"><img src="image/Purdue University.png" alt="Purdue University" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Purdue</div></div>
       </div>
-      <div class="logo-row" id="lr2">
+      <div class="logo-row rev" id="lr2">
         <div class="logo-slot"><img src="image/Replit.png" alt="Replit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Replit</div></div>
         <div class="logo-slot"><img src="image/Sony Music.png" alt="Sony Music" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">Sony Music</div></div>
         <div class="logo-slot"><img src="image/TI Digital.png" alt="TI Digital" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="logo-slot-ph" style="display:none">TI Digital</div></div>
@@ -1733,53 +1639,89 @@ body.light #s05-sub { color: #0A66C2; }
       <div class="founder-pin">
         <div class="founder-pin-heart" aria-hidden="true">💙</div>
         <div class="founder-pin-circle">
+          <!-- Fallback logic: If founder.jpg isn't found, automatically try founder.png -->
           <img src="image/founder.jpg"
                alt="Hephzibah Edwin"
-               onerror="this.style.opacity='0';">
+               onerror="if(this.src.indexOf('.jpg')!==-1){this.src='image/founder.png';}else{this.style.opacity='0';}">
         </div>
       </div>
 
       <div class="founder-letter-body">
 
-        <span class="fl-block fl-house-line" data-delay="0">
+        <div class="fl-skip-wrap fl-block" data-delay="0">
+          <button class="fl-skip-btn" onclick="document.getElementById('s04').scrollIntoView({behavior: 'smooth'})">Skip</button>
+          <span class="fl-skip-msg">If you are in a time crunch, you can totally skip past this.</span>
+        </div>
+
+        <span class="fl-block fl-house-line" data-delay="100">
           In every great story, there is a house.
         </span>
 
-        <span class="fl-block fl-house-line" data-delay="140">
-          A place where something is built. Where craft is learned slowly, practiced with everything you have, and then given away.
+        <span class="fl-block fl-house-line" data-delay="200">
+          A place where something gets built, where a craft is learned slowly, practiced with everything you have, and then finally given away when you step out into the real world.
         </span>
 
-        <span class="fl-block fl-bridge-solo" data-delay="260">
-          Writing has been that for me.
+        <span class="fl-block fl-bridge-solo" data-delay="300">
+          Writing and creativity have always been that for me.
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="400">
-          I started as a student with more words than plans. Thirteen years of learning what moves people. Six years of taking that into social media, where attention is the only currency that matters.
+          I started as a student with more words than plans, and I put 13 years of my life into learning one thing: how to tell stories, how to use them to move people.
         </span>
 
-        <div class="fl-block fl-list fl-muted-list" data-delay="540">
-          <span class="fl-list-item">Creators went from tens to hundreds of thousands.</span>
-          <span class="fl-list-item">Brands found the audiences that were made for them.</span>
+        <span class="fl-block fl-muted-passage" data-delay="500">
+          Then I took everything I learned from literature, from life, from time alone, and from conversations with people, and put it straight into social media.
+        </span>
+
+        <span class="fl-block fl-muted-passage" data-delay="600">
+          Six years of learning how attention works, how to make someone stop, see, and come back.
+        </span>
+
+        <span class="fl-block fl-muted-passage" data-delay="700">
+          Using platforms, reels, written posts, captions, and design across everything.
+        </span>
+
+        <span class="fl-block fl-pivot" data-delay="800">
+          Then what I saw happening in that period changed everything.
+        </span>
+
+        <div class="fl-block fl-list" data-delay="900">
+          <span class="fl-list-item">Hundreds of creators went from hundreds to thousands to lakhs of followers. Then from thousands to millions.</span>
+          <span class="fl-list-item">Brands that were once unknown found audiences as if they were already made for them.</span>
         </div>
 
-        <span class="fl-block fl-pivot" data-delay="660">
-          All of it brought me here. Not by accident.
+        <span class="fl-block fl-conviction" data-delay="1000">
+          And a part of me watched this happen.
         </span>
 
-        <span class="fl-block fl-conviction" data-delay="780">
-          Because there is a kind of work that chooses you before you choose it. I stopped arguing with mine. And I finally built a house.
+        <span class="fl-block fl-conviction" data-delay="1100">
+          A part of me knew I was making it happen.
         </span>
 
-        <span class="fl-block fl-build" data-delay="920">
-          From everything I had learned. From every account that grew, every creator who stopped feeling invisible. Built to serve something larger than a business. A house with my name on the door.
+        <span class="fl-block fl-pivot" data-delay="1200">
+          That was when it became real. That’s when I finally made a call.
         </span>
 
-        <span class="fl-block fl-name" data-delay="1060">
-          HEPZ Content House.
+        <span class="fl-block fl-build" data-delay="1300">
+          I decided I didn’t want to keep working under someone for the rest of my life.
         </span>
 
-        <span class="fl-block fl-portfolio" data-delay="1160">
-          If you want to see my work before this chapter, <a href="https://hephzibahe.my.canva.site/portfolio" target="_blank" rel="noopener" class="portfolio-link-blue">my entire portfolio is right here.</a>
+        <span class="fl-block fl-build" data-delay="1400">
+          I decided to build my own house… and decided it shall be called
+        </span>
+
+        <span class="fl-block fl-name" data-delay="1500">
+          <span class="fl-name-p1">HEPZ</span>
+          <span class="fl-name-rule"></span>
+          <span class="fl-name-p2">content house</span>
+        </span>
+
+        <span class="fl-block fl-bridge-solo" data-delay="1600">
+          To God be the glory.
+        </span>
+
+        <span class="fl-block fl-portfolio" data-delay="1700">
+          P.S. If you want to see my work before this chapter, <a href="https://hephzibahe.my.canva.site/portfolio" target="_blank" rel="noopener" class="portfolio-link-blue">my entire portfolio is right here.</a>
         </span>
 
       </div>
@@ -2229,7 +2171,8 @@ s01.addEventListener('scroll', () => {
   }
 });
 
-['tr0','tr1','tr2'].forEach(id=>{
+// Update arrays to duplicate both ticker and logo rows so the animation can roll infinitely
+['tr0','tr1','tr2', 'lr1', 'lr2'].forEach(id=>{
   const row=document.getElementById(id);
   if(row){Array.from(row.children).forEach(c=>row.appendChild(c.cloneNode(true)));}
 });
@@ -2294,6 +2237,7 @@ setTimeout(() => {
     '.carr-btn':    'Slide',
     '#theme-toggle':'Theme',
     '.rdot':        'Jump',
+    '.fl-skip-btn': 'Skip',
   };
 
   function getLabel(el) {
@@ -2440,9 +2384,6 @@ function slide(sectionId, dir) {
 // ═══════════════════════════════════════════════════════════════
 
 (function() {
-  // ── Utility: cycle through an array of elements, adding/removing
-  //    .auto-active one at a time on a given interval.
-  //    Returns a controller { start, stop }.
   function makeCycler(getEls, interval, onActivate, onDeactivate) {
     let timer = null, idx = 0;
     function tick() {
@@ -2467,8 +2408,6 @@ function slide(sectionId, dir) {
     };
   }
 
-  // ── Utility: observe a section, start cycler when ≥threshold visible,
-  //    stop + reset when it leaves. Returns the observer.
   function watchSection(sectionId, cycler, threshold) {
     const section = document.getElementById(sectionId);
     if (!section) return;
@@ -2481,18 +2420,12 @@ function slide(sectionId, dir) {
     io.observe(section);
   }
 
-  // ── Utility: prevent auto-active from fighting real hover.
-  //    On mouseenter remove auto-active; on mouseleave the cycler
-  //    will naturally re-apply it on its next tick.
   function yieldToHover(els) {
     els.forEach(el => {
       el.addEventListener('mouseenter', () => el.classList.remove('auto-active'));
     });
   }
 
-  // ─────────────────────────────────────────────
-  // s02 — Cycle through the 4 platform play-words
-  // ─────────────────────────────────────────────
   (function() {
     const words = [...document.querySelectorAll('#s02 .play-word')];
     if (!words.length) return;
@@ -2501,21 +2434,12 @@ function slide(sectionId, dir) {
     watchSection('s02', cycler, 0.4);
   })();
 
-  // ─────────────────────────────────────────────
-  // s04 — Highlight whichever offer card is the
-  // current "top" sticky card (the frontmost one).
-  // Piggybacks on the existing scroll stack logic.
-  // ─────────────────────────────────────────────
   (function() {
     const cards = [...document.querySelectorAll('.ocard-stack')];
     if (!cards.length) return;
     yieldToHover(cards);
 
     function updateActiveCard() {
-      // The frontmost card is the one with the highest z-index
-      // that has NOT yet had the next card land on top of it.
-      // We detect this by: card is sticky (≤ its top offset from viewport),
-      // and no card above it is also sticky yet.
       let frontmost = null;
       cards.forEach((card, i) => {
         const top = card.getBoundingClientRect().top;
@@ -2529,7 +2453,6 @@ function slide(sectionId, dir) {
         });
         if (isStuck && !isBeingCovered) frontmost = card;
       });
-      // If nothing is stuck, pick first card in view
       if (!frontmost) {
         cards.forEach(card => {
           const r = card.getBoundingClientRect();
@@ -2553,10 +2476,6 @@ function slide(sectionId, dir) {
     updateActiveCard();
   })();
 
-  // ─────────────────────────────────────────────
-  // s07 — Pulse badge icons on whichever carousel
-  // card is currently centred in the viewport
-  // ─────────────────────────────────────────────
   (function() {
     const track = document.getElementById('track-s07');
     if (!track) return;
@@ -2599,10 +2518,6 @@ function slide(sectionId, dir) {
     if (s07) io.observe(s07);
   })();
 
-  // ─────────────────────────────────────────────
-  // s08 — Highlight the testimonial card nearest
-  // the horizontal centre of each scrolling row
-  // ─────────────────────────────────────────────
   (function() {
     const rows = [...document.querySelectorAll('.testi-mrow')];
     if (!rows.length) return;
@@ -2640,10 +2555,6 @@ function slide(sectionId, dir) {
     if (s08) io.observe(s08);
   })();
 
-  // ─────────────────────────────────────────────
-  // s09 — Stagger-reveal the 3 social cards on
-  // scroll-in, then cycle through them
-  // ─────────────────────────────────────────────
   (function() {
     const scards = [...document.querySelectorAll('.s09-scard')];
     if (!scards.length) return;
@@ -2665,11 +2576,33 @@ function toggleFaq(btn) {
   if (!isOpen) item.classList.add('open');
 }
 
+// ── GUIDED READING HIGHLIGHT (Founder Letter) ──
+(function() {
+  const flBlocks = document.querySelectorAll('.founder-letter-body .fl-block');
+  if (!flBlocks.length) return;
 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reading-focus');
+        e.target.classList.remove('reading-past');
+      } else {
+        e.target.classList.remove('reading-focus');
+        const rect = e.target.getBoundingClientRect();
+        if (rect.top < window.innerHeight / 2) {
+          e.target.classList.add('reading-past');
+        } else {
+          e.target.classList.remove('reading-past');
+        }
+      }
+    });
+  }, {
+    rootMargin: "-25% 0px -30% 0px", // Trigger zone in the middle 45% of the screen
+    threshold: 0
+  });
 
-
-
-
+  flBlocks.forEach(b => observer.observe(b));
+})();
 
 // ── Meet the Founder — staggered block animation ──
 (function() {
