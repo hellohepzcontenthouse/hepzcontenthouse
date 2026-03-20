@@ -56,9 +56,43 @@ body.light {
   --logo-blend: multiply;
 }
 
-/* ── GLOBAL RESETS & TYPOGRAPHY ── */
+/* ── CUSTOM CURSOR ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-snap-type: y proximity; scroll-behavior: smooth; overflow-x: hidden; }
+#cr {
+  position: fixed; pointer-events: none; z-index: 99999;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
+  transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s, opacity 0.25s;
+  mix-blend-mode: normal;
+  will-change: transform;
+}
+#cr-ring {
+  position: fixed; pointer-events: none; z-index: 99998;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  transition: width 0.4s var(--ease), height 0.4s var(--ease), opacity 0.4s, border-color 0.3s;
+  will-change: transform;
+}
+#cr-label {
+  position: fixed; pointer-events: none; z-index: 99999;
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  padding: 4px 10px; border-radius: 100px;
+  opacity: 0; transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  white-space: nowrap;
+}
+body.cursor-hover #cr { width: 48px; height: 48px; background: var(--accent); opacity: 0.15; }
+body.cursor-hover #cr-ring { width: 56px; height: 56px; opacity: 0; }
+body.cursor-hover #cr-label { opacity: 1; transform: translate(-50%, calc(-50% - 36px)) scale(1); }
+body.cursor-click #cr { width: 8px; height: 8px; }
+body.cursor-click #cr-ring { width: 24px; height: 24px; opacity: 0.8; }
+@media (hover: none) { #cr, #cr-ring, #cr-label { display: none; } }
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; overflow-x: hidden; cursor: none; }
 body { 
   font-family: 'Inter', sans-serif; font-weight: 500; 
   background: var(--bg); color: var(--text-main); 
@@ -66,7 +100,9 @@ body {
   -webkit-font-smoothing: antialiased; 
   text-rendering: optimizeLegibility; 
   transition: background 0.4s ease, color 0.4s ease;
+  cursor: none;
 }
+a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-scard { cursor: none !important; }
 
 .noise-bg {
   position: fixed; inset: 0; pointer-events: none; z-index: 0; /* Placed behind nav */
@@ -599,6 +635,9 @@ body.light #s05-sub { color: #0A66C2; }
 </style>
 </head>
 <body>
+<div id="cr"></div>
+<div id="cr-ring"></div>
+<div id="cr-label"></div>
 <script>
   if (localStorage.getItem('hepz-theme') === 'light') {
     document.body.classList.add('light');
@@ -1065,16 +1104,91 @@ s01.addEventListener('scroll', () => {
   if(row){Array.from(row.children).forEach(c=>row.appendChild(c.cloneNode(true)));}
 });
 
-const slides=[...document.querySelectorAll('.s')];
-const io=new IntersectionObserver(es=>{
-  es.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.r').forEach(el=>el.classList.add('in'));
+// ── SCROLL ANIMATIONS — per element, not per section ──
+const animEls = document.querySelectorAll('.r');
+const animIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      animIO.unobserve(e.target); // fire once
     }
   });
-},{threshold:0.05});
-slides.forEach(sl=>io.observe(sl));
-setTimeout(()=>slides[0].querySelectorAll('.r').forEach(el=>el.classList.add('in')),60);
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+animEls.forEach(el => animIO.observe(el));
+// Trigger first section immediately
+setTimeout(() => {
+  document.querySelectorAll('#s01 .r, #s02 .r').forEach(el => el.classList.add('in'));
+}, 60);
+
+// ── CUSTOM CURSOR ──
+(function() {
+  const cr = document.getElementById('cr');
+  const ring = document.getElementById('cr-ring');
+  const label = document.getElementById('cr-label');
+  if (!cr) return;
+
+  let mx = -200, my = -200, rx = -200, ry = -200;
+  let raf;
+
+  // Smooth ring follow
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function loop() {
+    rx = lerp(rx, mx, 0.12);
+    ry = lerp(ry, my, 0.12);
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    label.style.left = rx + 'px';
+    label.style.top  = ry + 'px';
+    raf = requestAnimationFrame(loop);
+  }
+  loop();
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cr.style.left = mx + 'px';
+    cr.style.top  = my + 'px';
+  });
+
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+  document.addEventListener('mouseleave', () => { cr.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { cr.style.opacity = ''; ring.style.opacity = ''; });
+
+  // Hover labels for interactive elements
+  const LABELS = {
+    'a':            'Visit',
+    'button':       'Click',
+    '.rcard':       'View',
+    '.testi-card':  'Read',
+    '.ocard-stack': 'Details',
+    '.logo-slot':   'Brand',
+    '.s09-scard':   'Visit',
+    '.mega-cta':    'Book',
+    '.carr-btn':    'Slide',
+    '#theme-toggle':'Theme',
+    '.rdot':        'Jump',
+  };
+
+  function getLabel(el) {
+    for (const [sel, lbl] of Object.entries(LABELS)) {
+      if (el.closest(sel)) return lbl;
+    }
+    return null;
+  }
+
+  document.addEventListener('mouseover', e => {
+    const lbl = getLabel(e.target);
+    if (lbl) {
+      label.textContent = lbl;
+      document.body.classList.add('cursor-hover');
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (getLabel(e.target)) {
+      document.body.classList.remove('cursor-hover');
+    }
+  });
+})();
 
 const carousels = {};
 function initCarousel(sectionId) {
