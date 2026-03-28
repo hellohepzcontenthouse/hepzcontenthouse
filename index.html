@@ -63,50 +63,27 @@
 
 /* ── CUSTOM CURSOR ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-#cr {
-  position: fixed; pointer-events: none; z-index: 99999;
-  width: 12px; height: 12px; border-radius: 50%;
-  background: var(--accent);
-  transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s, opacity 0.25s;
-  mix-blend-mode: normal;
-  will-change: transform;
-}
-#cr-ring {
-  position: fixed; pointer-events: none; z-index: 99998;
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  transform: translate(-50%, -50%);
-  opacity: 0.5;
-  transition: width 0.4s var(--ease), height 0.4s var(--ease), opacity 0.4s, border-color 0.3s;
-  will-change: transform;
-}
 #cr-label {
   position: fixed; pointer-events: none; z-index: 99999;
   font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: #fff; background: var(--accent);
   padding: 4px 10px; border-radius: 100px;
-  opacity: 0; transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0; transform: translate(16px, 16px) scale(0.8);
   transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
   white-space: nowrap;
 }
-body.cursor-hover #cr { width: 48px; height: 48px; background: var(--accent); opacity: 0.15; }
-body.cursor-hover #cr-ring { width: 56px; height: 56px; opacity: 0; }
-body.cursor-hover #cr-label { opacity: 1; transform: translate(-50%, calc(-50% - 36px)) scale(1); }
-body.cursor-click #cr { width: 8px; height: 8px; }
-body.cursor-click #cr-ring { width: 24px; height: 24px; opacity: 0.8; }
-@media (hover: none) { #cr, #cr-ring, #cr-label { display: none; } }
-html { scroll-snap-type: y proximity; scroll-behavior: smooth; overflow-x: hidden; cursor: none; }
+body.cursor-hover #cr-label { opacity: 1; transform: translate(16px, 16px) scale(1); }
+@media (hover: none) { #cr-label { display: none; } }
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; overflow-x: hidden; }
 body { 
   font-family: 'Inter', sans-serif; font-weight: 500; 
   background: var(--bg); color: var(--text-main); 
   overflow-x: hidden; line-height: 1.6; 
   -webkit-font-smoothing: antialiased; 
   text-rendering: optimizeLegibility;
-  cursor: none;
 }
-a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-scard { cursor: none !important; }
+a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-scard { cursor: pointer !important; }
 
 .noise-bg {
   position: fixed; inset: 0; pointer-events: none; z-index: 0; /* Placed behind nav */
@@ -553,7 +530,7 @@ a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-
   border: none !important;
   border-radius: 100px;
   padding: 8px 16px;
-  cursor: none;
+  cursor: pointer;
   transition: background 0.3s, transform 0.3s !important;
 }
 .fl-skip-btn:hover {
@@ -1379,7 +1356,7 @@ a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-
 /* ── GRID BREATHING ── */
 @keyframes grid-breathe {
   0%, 100% { opacity: 0.15; }
-  50%       { opacity: 1;    }
+  50%        { opacity: 1;    }
 }
 .grid-bg { animation: grid-breathe 10s ease-in-out infinite; }
 @media (max-width: 768px) { .grid-bg { animation: none; opacity: 0.55; } }
@@ -1409,8 +1386,6 @@ a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-
 </style>
 </head>
 <body>
-<div id="cr"></div>
-<div id="cr-ring"></div>
 <div id="cr-label"></div>
 <div class="noise-bg"></div>
 <div class="grid-bg"></div>
@@ -1631,7 +1606,7 @@ a, button, [role="button"], .logo-slot, .rcard, .testi-card, .ocard-stack, .s09-
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="600">
-          Six years of learning how attention works, how to make someone stop, stay, and come back.
+          Six years of learning how learning works, how to make someone stop, stay, and come back.
         </span>
 
         <span class="fl-block fl-muted-passage" data-delay="700">
@@ -2152,10 +2127,8 @@ setTimeout(() => {
 
 // ── CUSTOM CURSOR ──
 (function() {
-  const cr = document.getElementById('cr');
-  const ring = document.getElementById('cr-ring');
   const label = document.getElementById('cr-label');
-  if (!cr) return;
+  if (!label) return;
 
   let mx = -200, my = -200, rx = -200, ry = -200;
   let raf;
@@ -2164,8 +2137,6 @@ setTimeout(() => {
   function loop() {
     rx = lerp(rx, mx, 0.12);
     ry = lerp(ry, my, 0.12);
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
     label.style.left = rx + 'px';
     label.style.top  = ry + 'px';
     raf = requestAnimationFrame(loop);
@@ -2174,14 +2145,10 @@ setTimeout(() => {
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cr.style.left = mx + 'px';
-    cr.style.top  = my + 'px';
   });
 
-  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
-  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
-  document.addEventListener('mouseleave', () => { cr.style.opacity = '0'; ring.style.opacity = '0'; });
-  document.addEventListener('mouseenter', () => { cr.style.opacity = ''; ring.style.opacity = ''; });
+  document.addEventListener('mouseleave', () => { label.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { label.style.opacity = ''; });
 
   const LABELS = {
     'a':            'Visit',
